@@ -1,0 +1,99 @@
+# ==============================================================================
+# GWC DATA.AI | Git Ignore Configuration
+# ==============================================================================
+
+# Python Bytecode & Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment Variables & Secrets (CRITICAL)
+.env
+.env.*
+!.env.example
+credentials.json
+!credentials.example.json
+token.json
+client_secret*.json
+*.pem
+*.key
+
+# Pytest & Coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# Logs & Runtime Dumps
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Operating System & IDE Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# Temporary & Scratch Dirs
+scratch/
+*.tmp
+*.bak
+*.swp
+*~
+
+# Runtime Data & Output Artifacts (Keep clean structure, ignore runtime processing outputs)
+app/data/resumes/*
+!app/data/resumes/.gitkeep
+app/data/resumes_organized/*
+!app/data/resumes_organized/.gitkeep
+app/data/domo_sync_audit/
+app/data/email_audit/
+app/data/screening_results.*
+app/data/audit_logs.*
+app/data/candidate_screening_summary.xlsx
+app/data/interview_assignments.xlsx
+app/data/candidates_pool.json
+app/data/batch_status.json

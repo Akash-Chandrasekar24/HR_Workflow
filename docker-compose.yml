@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  resume_screening_app:
+    build: .
+    container_name: automated_resume_screening
+    ports:
+      - "8000:8000"
+    environment:
+      - ENV=production
+      - DEBUG=false
+      - PORT=8000
+      - HMAC_SECRET=change-this-super-secret-hmac-key-for-google-apps-script
+      - GOOGLE_APPLICATION_CREDENTIALS=service_account.json
+      - CSV_DATA_PATH=app/data/screening_results.csv
+      - JOB_RULES_PATH=app/config/job_rules.json
+    volumes:
+      - ./app/data:/app/app/data
+      - ./service_account.json:/app/service_account.json:ro
+    restart: unless-stopped

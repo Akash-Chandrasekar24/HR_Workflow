@@ -1,0 +1,116 @@
+[
+  {
+    "employee_id": "EMP-101",
+    "employee_name": "Alex Johnson",
+    "role": "Lead AI Engineer",
+    "department": "AI Engineer",
+    "domain": "AI_ENGINEER",
+    "domain_label": "AI / ML Engineering",
+    "skills": [
+      "GenAI",
+      "LLM",
+      "RAG",
+      "LangChain",
+      "Prompt Engineering",
+      "Python",
+      "Vector Databases",
+      "vLLM"
+    ],
+    "employee_email": "akashchandrasekar24@gmail.com"
+  },
+  {
+    "employee_id": "EMP-105",
+    "employee_name": "Dr. Vikram Seth",
+    "role": "Principal ML Architect",
+    "department": "AI Engineer",
+    "domain": "AI_ENGINEER",
+    "domain_label": "AI / ML Engineering",
+    "skills": [
+      "Deep Learning",
+      "Machine Learning",
+      "PyTorch",
+      "TensorFlow",
+      "Computer Vision",
+      "NLP",
+      "Model Fine-Tuning",
+      "MLOps"
+    ],
+    "employee_email": "akashchandrasekar24@gmail.com"
+  },
+  {
+    "employee_id": "EMP-102",
+    "employee_name": "Priya Sharma",
+    "role": "Senior Backend Lead",
+    "department": "Full Stack Developer",
+    "domain": "FULLSTACK_DEV",
+    "domain_label": "Full Stack & Web",
+    "skills": [
+      "FastAPI",
+      "Python",
+      "Node.js",
+      "PostgreSQL",
+      "System Design",
+      "Microservices",
+      "Docker",
+      "REST APIs"
+    ],
+    "employee_email": "akashchandrasekar24@gmail.com"
+  },
+  {
+    "employee_id": "EMP-104",
+    "employee_name": "Sarah Connor",
+    "role": "Staff Full Stack Engineer",
+    "department": "Full Stack Developer",
+    "domain": "FULLSTACK_DEV",
+    "domain_label": "Full Stack & Web",
+    "skills": [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "JavaScript",
+      "Frontend Architecture",
+      "GraphQL",
+      "Tailwind CSS",
+      "Redux"
+    ],
+    "employee_email": "akashchandrasekar24@gmail.com"
+  },
+  {
+    "employee_id": "EMP-103",
+    "employee_name": "Rahul Verma",
+    "role": "Principal Data Architect",
+    "department": "Data Analyst",
+    "domain": "DATA_ANALYST",
+    "domain_label": "Data Analytics & BI",
+    "skills": [
+      "Data Warehousing",
+      "SQL",
+      "ETL Pipelines",
+      "Snowflake",
+      "Databricks",
+      "Data Modeling",
+      "Big Data",
+      "PostgreSQL"
+    ],
+    "employee_email": "akashchandrasekar24@gmail.com"
+  },
+  {
+    "employee_id": "EMP-106",
+    "employee_name": "Ananya Iyer",
+    "role": "Senior BI & Analytics Lead",
+    "department": "Data Analyst",
+    "domain": "DATA_ANALYST",
+    "domain_label": "Data Analytics & BI",
+    "skills": [
+      "PowerBI",
+      "Tableau",
+      "Dashboarding",
+      "Statistical Analysis",
+      "Business Metrics",
+      "SQL",
+      "Excel",
+      "Data Storytelling"
+    ],
+    "employee_email": "akashchandrasekar24@gmail.com"
+  }
+]

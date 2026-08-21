@@ -1,0 +1,3751 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GWC DATA.AI | HR Command Center & Selected Candidate Hub</title>
+    <link rel="icon" href="https://gwcdata.ai/images/favlogo1.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --purple: #7030B1;
+            --purple-light: #B56DD3;
+            --purple-deep: #5A2591;
+            --purple-bg: #faf5ff;
+            --orange: #FF6B00;
+            --orange-deep: #ED7200;
+            --dark: #0F1729;
+            --gray: #64748b;
+            --border: #ececf3;
+            --line: #f3eefb;
+            --grad-po: linear-gradient(90deg, #6F2B8B 0%, #ED7200 100%);
+            --grad-pill: linear-gradient(135deg, #7030B1 0%, #B56DD3 100%);
+            --ease: cubic-bezier(0.16, 1, 0.3, 1);
+            --shadow-sm: 0 1px 2px rgba(15, 23, 41, .04), 0 4px 16px rgba(15, 23, 41, .04);
+            --shadow-md: 0 8px 30px rgba(112, 48, 177, .10);
+            --shadow-lg: 0 24px 60px rgba(15, 23, 41, .22);
+            --sidebar-w: 248px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f6f4fb;
+            color: var(--dark);
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        /* Decorative background */
+        .bg-decor {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .bg-grid {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(to right, rgba(112, 48, 177, .04) 1px, transparent 1px), linear-gradient(to bottom, rgba(112, 48, 177, .04) 1px, transparent 1px);
+            background-size: 46px 46px;
+            -webkit-mask-image: radial-gradient(130% 90% at 70% 0%, #000 40%, transparent 80%);
+            mask-image: radial-gradient(130% 90% at 70% 0%, #000 40%, transparent 80%);
+        }
+
+        .bg-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(70px);
+            opacity: .5;
+        }
+
+        .bg-blob.b1 {
+            width: 520px;
+            height: 520px;
+            top: -160px;
+            right: -120px;
+            background: radial-gradient(circle, rgba(181, 109, 211, .42), rgba(255, 209, 190, .18) 45%, transparent 72%);
+            animation: float 16s ease-in-out infinite;
+        }
+
+        .bg-blob.b2 {
+            width: 440px;
+            height: 440px;
+            bottom: -140px;
+            left: 180px;
+            background: radial-gradient(circle, rgba(255, 107, 0, .18), rgba(181, 109, 211, .16) 50%, transparent 74%);
+            animation: float 20s ease-in-out infinite reverse;
+        }
+
+        .shell {
+            display: flex;
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-w);
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, .82);
+            -webkit-backdrop-filter: saturate(180%) blur(16px);
+            backdrop-filter: saturate(180%) blur(16px);
+            border-right: 1px solid rgba(112, 48, 177, .09);
+            display: flex;
+            flex-direction: column;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            padding: 22px 16px;
+            transition: transform .35s var(--ease);
+        }
+
+        .sb-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 8px 20px;
+            border-bottom: 1px solid var(--line);
+            margin-bottom: 16px;
+        }
+
+        .sb-brand img {
+            height: 34px;
+            width: auto;
+        }
+
+        .sb-section-label {
+            font-size: 10.5px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: #a89fc0;
+            padding: 12px 12px 6px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 14px;
+            border-radius: 12px;
+            color: var(--gray);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            transition: background .25s var(--ease), color .25s var(--ease);
+            margin-bottom: 2px;
+        }
+
+        .nav-item svg {
+            width: 19px;
+            height: 19px;
+            flex-shrink: 0;
+        }
+
+        .nav-item:hover {
+            background: #f5f0fc;
+            color: var(--purple);
+        }
+
+        .nav-item.active {
+            background: var(--purple-bg);
+            color: var(--purple);
+        }
+
+        .nav-item.active::before {
+            content: "";
+            position: absolute;
+            left: -16px;
+            top: 8px;
+            bottom: 8px;
+            width: 4px;
+            border-radius: 0 4px 4px 0;
+            background: var(--grad-po);
+        }
+
+        .nav-badge {
+            margin-left: auto;
+            background: var(--grad-po);
+            color: #fff;
+            font-size: 10.5px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 20px;
+            min-width: 22px;
+            text-align: center;
+        }
+
+        .sb-foot {
+            margin-top: auto;
+            padding-top: 16px;
+            border-top: 1px solid var(--line);
+        }
+
+        .sb-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+            font-size: 11.5px;
+            font-weight: 600;
+            padding: 9px 12px;
+            border-radius: 12px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .dot::after {
+            content: "";
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: #22c55e;
+            opacity: .5;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Main */
+        .main {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 30px;
+            background: rgba(246, 244, 251, .8);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(112, 48, 177, .07);
+        }
+
+        .hamburger {
+            display: none;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tb-titles h1 {
+            font-size: 19px;
+            font-weight: 800;
+            letter-spacing: -.4px;
+        }
+
+        .tb-titles p {
+            font-size: 12.5px;
+            color: var(--gray);
+            font-weight: 400;
+            margin-top: 1px;
+        }
+
+        .tb-actions {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--grad-pill);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .content {
+            padding: 28px 30px 60px;
+            flex: 1;
+        }
+
+        .view {
+            display: none;
+            animation: fadeUp .5s var(--ease);
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 11px 22px;
+            border-radius: 26px;
+            font-weight: 700;
+            font-size: 13.5px;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: transform .3s var(--ease), box-shadow .3s var(--ease), background .3s var(--ease);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:active {
+            transform: scale(.98);
+        }
+
+        .btn-primary {
+            background: var(--grad-po);
+            color: #fff;
+            box-shadow: inset 0 0 12px rgba(255, 255, 255, .28), 0 6px 18px rgba(112, 48, 177, .32);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: inset 0 0 14px rgba(255, 255, 255, .35), 0 10px 26px rgba(255, 107, 0, .4);
+        }
+
+        .btn-primary::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, .35), transparent);
+            transform: skewX(-20deg);
+            transition: left .6s var(--ease);
+        }
+
+        .btn-primary:hover::after {
+            left: 130%;
+        }
+
+        .btn-secondary {
+            background: var(--purple-bg);
+            color: var(--purple);
+            border: 1px solid #e9d5ff;
+        }
+
+        .btn-secondary:hover {
+            background: #f3e8ff;
+            transform: translateY(-1px);
+        }
+
+        .btn-ghost {
+            background: #fff;
+            color: var(--gray);
+            border: 1px solid var(--border);
+        }
+
+        .btn-ghost:hover {
+            border-color: #e9d5ff;
+            color: var(--purple);
+        }
+
+        .btn-excel {
+            background: #f0fdf4;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+
+        .btn-excel:hover {
+            background: #dcfce7;
+            transform: translateY(-1px);
+        }
+
+        .btn-sm {
+            padding: 8px 15px;
+            font-size: 12px;
+            border-radius: 10px;
+        }
+
+        .btn:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Cards */
+        .card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow .4s var(--ease);
+            margin-bottom: 22px;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .section-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .section-head h2 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--purple);
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .section-head .sub {
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 2px;
+            font-weight: 400;
+        }
+
+        /* KPI grid */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(196px, 1fr));
+            gap: 18px;
+            margin-bottom: 22px;
+        }
+
+        .kpi {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 20px 22px;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+            transition: transform .4s var(--ease), box-shadow .4s var(--ease);
+        }
+
+        .kpi::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--grad-po);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .45s var(--ease);
+        }
+
+        .kpi:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .kpi:hover::before {
+            transform: scaleX(1);
+        }
+
+        .kpi-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .kpi-ico {
+            width: 38px;
+            height: 38px;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .kpi-ico svg {
+            width: 19px;
+            height: 19px;
+        }
+
+        .ico-purple {
+            background: #faf5ff;
+            color: var(--purple);
+        }
+
+        .ico-green {
+            background: #f0fdf4;
+            color: #16a34a;
+        }
+
+        .ico-orange {
+            background: #fff7ed;
+            color: var(--orange);
+        }
+
+        .ico-blue {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .ico-slate {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .kpi-value {
+            font-size: 34px;
+            font-weight: 800;
+            margin-top: 14px;
+            line-height: 1;
+        }
+
+        .kpi-value small {
+            font-size: 16px;
+            color: var(--gray);
+            font-weight: 600;
+        }
+
+        .kpi-label {
+            font-size: 11.5px;
+            color: var(--gray);
+            font-weight: 500;
+            margin-top: 6px;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+        }
+
+        /* Funnel */
+        .funnel {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .funnel-step {
+            flex: 1;
+            min-width: 140px;
+            background: #faf8fc;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .funnel-step .bar {
+            height: 6px;
+            border-radius: 6px;
+            background: var(--grad-po);
+            margin-top: 10px;
+            transition: width 1s var(--ease);
+        }
+
+        .funnel-step .n {
+            font-size: 26px;
+            font-weight: 800;
+        }
+
+        .funnel-step .t {
+            font-size: 12px;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .funnel-step .pct {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--purple);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 22px;
+        }
+
+        /* Activity feed */
+        .act {
+            display: flex;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .act:last-child {
+            border-bottom: none;
+        }
+
+        .act-dot {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+        }
+
+        .act-body {
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .act-body b {
+            font-weight: 600;
+        }
+
+        .act-time {
+            font-size: 11px;
+            color: var(--gray);
+            margin-top: 2px;
+        }
+
+        /* Interviewer cards */
+        .workload-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+        }
+
+        .workload-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 18px;
+            box-shadow: var(--shadow-sm);
+            transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s;
+        }
+
+        .workload-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: #e9d5ff;
+        }
+
+        .workload-emp-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .workload-emp-role {
+            font-size: 12px;
+            color: var(--gray);
+            margin-bottom: 12px;
+        }
+
+        .workload-stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 4px 0;
+            border-top: 1px dashed #eef0f6;
+        }
+
+        .workload-badge-avail {
+            background: #f0fdf4;
+            color: #166534;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .workload-badge-busy {
+            background: #fff7ed;
+            color: #c2410c;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .meter {
+            height: 8px;
+            background: #f1edf8;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 6px 0;
+        }
+
+        .meter span {
+            display: block;
+            height: 100%;
+            border-radius: 8px;
+            background: var(--grad-po);
+            transition: width 1s var(--ease);
+        }
+
+        /* Form */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .form-input {
+            padding: 12px 15px;
+            border-radius: 12px;
+            border: 1.5px solid #e6e8f0;
+            font-size: 13.5px;
+            outline: none;
+            background: #fdfcff;
+            transition: border-color .25s, box-shadow .25s;
+            width: 100%;
+        }
+
+        .form-input:focus {
+            border-color: var(--purple);
+            box-shadow: 0 0 0 4px rgba(112, 48, 177, .12);
+            background: #fff;
+        }
+
+        .search-box {
+            max-width: 320px;
+        }
+
+        /* Table */
+        .table-responsive {
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13.5px;
+            text-align: left;
+        }
+
+        th {
+            background: linear-gradient(90deg, var(--purple), var(--purple-light));
+            color: #fff;
+            padding: 14px 16px;
+            font-size: 11.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            position: sticky;
+            top: 0;
+        }
+
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--line);
+            vertical-align: middle;
+        }
+
+        tbody tr.cand-row {
+            cursor: pointer;
+            transition: background .2s var(--ease);
+        }
+
+        tbody tr.cand-row:hover {
+            background: #faf5ff;
+        }
+
+        .cand-name {
+            font-weight: 600;
+        }
+
+        .cand-id {
+            font-size: 11px;
+            color: var(--gray);
+            font-family: monospace;
+        }
+
+        .score-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 120px;
+        }
+
+        .score-bar {
+            flex: 1;
+            height: 7px;
+            background: #f1edf8;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .score-bar span {
+            display: block;
+            height: 100%;
+            background: var(--grad-po);
+            border-radius: 6px;
+        }
+
+        .score-num {
+            font-weight: 700;
+            color: var(--purple);
+            font-size: 13px;
+        }
+
+        .pill {
+            padding: 5px 11px;
+            border-radius: 20px;
+            font-size: 11.5px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .pill-fixed {
+            background: #f0fdf4;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+
+        .pill-wait {
+            background: #fff7ed;
+            color: var(--orange);
+            border: 1px solid #ffedd5;
+        }
+
+        .pill-unassigned {
+            background: #f1f5f9;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+        }
+
+        .badge {
+            padding: 5px 11px;
+            border-radius: 20px;
+            font-size: 11.5px;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .badge-shortlisted {
+            background: #faf5ff;
+            color: var(--purple);
+            border: 1px solid #e9d5ff;
+        }
+
+        .teams-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            color: var(--purple);
+            font-weight: 600;
+            font-size: 12px;
+            margin-top: 4px;
+            text-decoration: none;
+            border-bottom: 1px dashed var(--purple);
+        }
+
+        .teams-link-btn:hover {
+            color: var(--orange);
+            border-bottom-color: var(--orange);
+        }
+
+        /* Drawer */
+        .drawer-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 41, .45);
+            backdrop-filter: blur(3px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .35s var(--ease), visibility .35s;
+            z-index: 900;
+        }
+
+        .drawer-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 560px;
+            max-width: 94vw;
+            background: #fff;
+            box-shadow: var(--shadow-lg);
+            transform: translateX(100%);
+            transition: transform .4s var(--ease);
+            z-index: 901;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .drawer.open {
+            transform: none;
+        }
+
+        .drawer-head {
+            background: linear-gradient(135deg, #5A2591, #7030B1 55%, #FF6B00 130%);
+            color: #fff;
+            padding: 22px 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .drawer-head::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, .06) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, .06) 1px, transparent 1px);
+            background-size: 28px 28px;
+            -webkit-mask-image: radial-gradient(120% 100% at 100% 0%, #000, transparent 70%);
+            mask-image: radial-gradient(120% 100% at 100% 0%, #000, transparent 70%);
+        }
+
+        .drawer-head h3 {
+            font-size: 20px;
+            font-weight: 800;
+            position: relative;
+            z-index: 1;
+        }
+
+        .drawer-head .role {
+            font-size: 13px;
+            opacity: .92;
+            position: relative;
+            z-index: 1;
+            margin-top: 2px;
+        }
+
+        .drawer-close {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .2);
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .drawer-tabs {
+            display: flex;
+            gap: 4px;
+            padding: 14px 20px 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .dtab {
+            padding: 10px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gray);
+            cursor: pointer;
+            border-bottom: 2.5px solid transparent;
+            transition: color .2s, border-color .2s;
+        }
+
+        .dtab.active {
+            color: var(--purple);
+            border-bottom-color: var(--purple);
+        }
+
+        .drawer-body {
+            padding: 22px 24px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .dpanel {
+            display: none;
+        }
+
+        .dpanel.active {
+            display: block;
+            animation: fadeUp .35s var(--ease);
+        }
+
+        .kv {
+            display: flex;
+            justify-content: space-between;
+            gap: 14px;
+            padding: 9px 0;
+            border-bottom: 1px solid var(--line);
+            font-size: 13.5px;
+        }
+
+        .kv span:first-child {
+            color: var(--gray);
+            flex-shrink: 0;
+        }
+
+        .kv span:last-child {
+            font-weight: 600;
+            text-align: right;
+            word-break: break-word;
+        }
+
+        .reason-box {
+            background: #faf5ff;
+            border: 1px solid #e9d5ff;
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 13.5px;
+            line-height: 1.6;
+            color: #4c1d95;
+            margin-top: 6px;
+        }
+
+        .assign-row {
+            margin-top: 18px;
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+            flex-wrap: wrap;
+        }
+
+        .select-interviewer {
+            flex: 1;
+            min-width: 200px;
+            padding: 11px 14px;
+            border-radius: 12px;
+            border: 1.5px solid #e6e8f0;
+            font-family: inherit;
+            font-size: 13px;
+            color: var(--purple);
+            font-weight: 600;
+            background: #fff;
+            outline: none;
+            cursor: pointer;
+            transition: border-color .2s, box-shadow .2s;
+        }
+
+        .select-interviewer:focus {
+            border-color: var(--orange);
+            box-shadow: 0 0 0 3px rgba(255, 107, 0, .12);
+        }
+
+        .q-block {
+            background: #faf5ff;
+            border-left: 4px solid var(--purple);
+            padding: 13px 16px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .q-block .q {
+            font-weight: 600;
+            font-size: 13.5px;
+            color: #1e1b4b;
+            margin-bottom: 6px;
+        }
+
+        .q-block .look {
+            font-size: 12.5px;
+            color: #166534;
+            font-weight: 600;
+        }
+
+        .q-block .look span {
+            font-weight: 400;
+            color: #374151;
+        }
+
+        .q-block .follow {
+            font-size: 12.5px;
+            color: #9a3412;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .q-block .follow span {
+            font-weight: 400;
+            color: #4b5563;
+            font-style: italic;
+        }
+
+        .core-block {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 13px 16px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .core-block .topic {
+            font-weight: 700;
+            color: #1d4ed8;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .core-block ul,
+        .sys-block ul,
+        .rf-block ul {
+            margin: 6px 0 0;
+            padding-left: 18px;
+            font-size: 12.5px;
+            color: #475569;
+        }
+
+        .sys-block {
+            background: #fff7ed;
+            border-left: 4px solid #ea580c;
+            padding: 13px 16px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .rf-block {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 8px;
+            padding: 13px 16px;
+        }
+
+        .rf-block li {
+            color: #991b1b;
+            margin-bottom: 6px;
+        }
+
+        .drawer-foot {
+            padding: 16px 24px;
+            border-top: 1px solid var(--line);
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            background: #faf8fc;
+            flex-wrap: wrap;
+        }
+
+        .dh4 {
+            margin: 18px 0 10px;
+            font-size: 14px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Spinner */
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3.5px solid #ede4f7;
+            border-top-color: var(--purple);
+            animation: spin .85s linear infinite;
+        }
+
+        /* Alert (screening drive) */
+        #alert-box {
+            display: none;
+            margin-top: 16px;
+            padding: 14px 20px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .alert-success {
+            background: #f0fdf4;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+
+        .alert-error {
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+        }
+
+        /* Toast */
+        .toast-wrap {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-left: 4px solid #16a34a;
+            border-radius: 12px;
+            padding: 14px 18px;
+            box-shadow: var(--shadow-lg);
+            font-size: 13.5px;
+            font-weight: 500;
+            min-width: 280px;
+            max-width: 380px;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            animation: toastIn .4s var(--ease);
+        }
+
+        .toast.err {
+            border-left-color: #dc2626;
+        }
+
+        .toast b {
+            font-weight: 700;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: .5;
+            }
+
+            70% {
+                transform: scale(2.4);
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(12px, -24px);
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        @keyframes toastIn {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        @media (prefers-reduced-motion:reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+        @media (max-width:1180px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width:820px) {
+            .sidebar {
+                position: fixed;
+                z-index: 950;
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: none;
+            }
+
+            .hamburger {
+                display: inline-flex;
+            }
+
+            .content {
+                padding: 22px 16px 50px;
+            }
+
+            .topbar {
+                padding: 14px 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg-decor" aria-hidden="true">
+        <div class="bg-grid"></div>
+        <div class="bg-blob b1"></div>
+        <div class="bg-blob b2"></div>
+    </div>
+    <div class="toast-wrap" id="toasts"></div>
+
+    <div class="shell">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sb-brand"><img src="https://gwcdata.ai/images/logo.svg" alt="GWC DATA.AI"></div>
+            <div class="sb-section-label">Recruitment</div>
+            <div class="nav-item active" data-view="overview" onclick="go(this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <rect x="3" y="3" width="7" height="7" rx="1.5" />
+                    <rect x="14" y="3" width="7" height="7" rx="1.5" />
+                    <rect x="3" y="14" width="7" height="7" rx="1.5" />
+                    <rect x="14" y="14" width="7" height="7" rx="1.5" />
+                </svg>
+                Overview
+            </div>
+            <div class="nav-item" data-view="screening" onclick="go(this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z" stroke-linejoin="round" />
+                </svg>
+                Screening Drive
+            </div>
+            <div class="nav-item" data-view="interviewers" onclick="go(this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <circle cx="9" cy="8" r="3.2" />
+                    <path d="M3.5 20a5.5 5.5 0 0 1 11 0" stroke-linecap="round" />
+                    <path d="M16 6.5a3 3 0 0 1 0 5.8M18 20a5.2 5.2 0 0 0-2.5-4.4" stroke-linecap="round" />
+                </svg>
+                Interviewers
+            </div>
+            <div class="nav-item" data-view="candidates" onclick="go(this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M4 5h16M4 12h16M4 19h16" stroke-linecap="round" />
+                </svg>
+                Candidates <span class="nav-badge" id="nav-cand-count">0</span>
+            </div>
+            <div class="sb-foot">
+                <div class="sb-status"><span class="dot"></span> System Live &amp; Operational</div>
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <div class="main">
+            <header class="topbar">
+                <button class="hamburger" onclick="document.getElementById('sidebar').classList.toggle('open')"
+                    aria-label="Menu">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#0F1729" stroke-width="2">
+                        <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" />
+                    </svg>
+                </button>
+                <div class="tb-titles">
+                    <h1 id="page-title">HR Recruitment Command Center</h1>
+                    <p id="page-sub">Real-time pipeline, interviewer capacity &amp; AI-scheduled interviews</p>
+                </div>
+                <div class="tb-actions">
+                    <button onclick="openFinalizeModal()" id="btn-finalize-batch" class="btn btn-sm"
+                        style="background:linear-gradient(135deg,#16a34a,#059669);color:#fff;font-weight:700;border:none;box-shadow:0 4px 14px rgba(22,163,74,0.35);display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border-radius:8px;cursor:pointer;">
+                        ⚡ Finalize &amp; Dispatch Batch
+                    </button>
+                    <button onclick="openJDModal()" class="btn btn-secondary btn-sm"
+                        style="background:linear-gradient(135deg,#7030B1,#4f46e5);color:#fff;border:none;font-weight:600;display:inline-flex;align-items:center;gap:5px;">📋 Job Descriptions &amp; ATS</button>
+                    <button onclick="openLogsModal()" class="btn btn-secondary btn-sm"
+                        style="background:#1e1b4b;color:#e0e7ff;border:none;">📋 System Logs</button>
+                    <button onclick="downloadExcel()" class="btn btn-excel btn-sm">📥 Export Excel</button>
+                    <button onclick="sendDigestEmail()" id="btn-digest" class="btn btn-secondary btn-sm">📩 Send HR
+                        Digest</button>
+                    <div class="avatar">HR</div>
+                </div>
+
+            </header>
+
+            <div class="content">
+                <!-- OVERVIEW -->
+                <section class="view active" id="view-overview">
+                    <div class="kpi-grid">
+                        <div class="kpi">
+                            <div class="kpi-top">
+                                <div class="kpi-ico ico-slate"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="1.8">
+                                        <path d="M4 19V5a2 2 0 0 1 2-2h9l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z" />
+                                        <path d="M14 3v5h5" />
+                                    </svg></div>
+                            </div>
+                            <div class="kpi-value" id="metric-total" style="color:var(--dark)">0</div>
+                            <div class="kpi-label">Total Candidates Evaluated</div>
+                        </div>
+                        <div class="kpi">
+                            <div class="kpi-top">
+                                <div class="kpi-ico ico-purple"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="1.8">
+                                        <path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg></div>
+                            </div>
+                            <div class="kpi-value" id="metric-shortlisted" style="color:var(--purple)">0</div>
+                            <div class="kpi-label">Selected / Shortlisted</div>
+                        </div>
+                        <div class="kpi">
+                            <div class="kpi-top">
+                                <div class="kpi-ico ico-green"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="1.8">
+                                        <rect x="3" y="4" width="18" height="17" rx="2" />
+                                        <path d="M16 2v4M8 2v4M3 10h18" stroke-linecap="round" />
+                                    </svg></div>
+                            </div>
+                            <div class="kpi-value" id="metric-fixed" style="color:#16a34a">0</div>
+                            <div class="kpi-label">MS Teams Meeting Fixed</div>
+                        </div>
+                        <div class="kpi">
+                            <div class="kpi-top">
+                                <div class="kpi-ico ico-orange"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="1.8">
+                                        <circle cx="12" cy="12" r="9" />
+                                        <path d="M12 7v5l3 2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg></div>
+                            </div>
+                            <div class="kpi-value" id="metric-pending" style="color:var(--orange)">0</div>
+                            <div class="kpi-label">Meeting Yet To Be Fixed</div>
+                        </div>
+                        <div class="kpi">
+                            <div class="kpi-top">
+                                <div class="kpi-ico ico-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.8">
+                                        <path d="M3 17l6-6 4 4 8-8" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M17 7h4v4" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg></div>
+                            </div>
+                            <div class="kpi-value" id="metric-avg" style="color:#2563eb">0<small>/100</small></div>
+                            <div class="kpi-label">Avg Weighted Score</div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="section-head">
+                            <div>
+                                <h2>🎯 Recruitment Pipeline</h2>
+                                <div class="sub">Candidate flow from evaluation to scheduled interview</div>
+                            </div>
+                        </div>
+                        <div class="funnel">
+                            <div class="funnel-step"><span class="pct" id="fn-pct-total">—</span>
+                                <div class="n" id="fn-total">0</div>
+                                <div class="t">Evaluated</div>
+                                <div class="bar" id="fn-bar-total" style="width:100%"></div>
+                            </div>
+                            <div class="funnel-step"><span class="pct" id="fn-pct-short">—</span>
+                                <div class="n" id="fn-short">0</div>
+                                <div class="t">Shortlisted</div>
+                                <div class="bar" id="fn-bar-short" style="width:0%"></div>
+                            </div>
+                            <div class="funnel-step"><span class="pct" id="fn-pct-assign">—</span>
+                                <div class="n" id="fn-assign">0</div>
+                                <div class="t">Assigned</div>
+                                <div class="bar" id="fn-bar-assign" style="width:0%"></div>
+                            </div>
+                            <div class="funnel-step"><span class="pct" id="fn-pct-sched">—</span>
+                                <div class="n" id="fn-sched">0</div>
+                                <div class="t">Scheduled</div>
+                                <div class="bar" id="fn-bar-sched" style="width:0%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="card" style="margin-bottom:0">
+                            <div class="section-head">
+                                <h2>🕑 Recent Activity</h2>
+                            </div>
+                            <div id="activity-feed">
+                                <div style="color:var(--gray);font-size:13px;padding:8px 0;">Loading activity…</div>
+                            </div>
+                        </div>
+                        <div class="card" style="margin-bottom:0">
+                            <div class="section-head">
+                                <h2>⚡ Quick Actions</h2>
+                            </div>
+                            <div style="display:flex;flex-direction:column;gap:12px;">
+                                <button class="btn btn-primary" style="width:100%"
+                                    onclick="go(document.querySelector('[data-view=screening]'))">🚀 Launch New
+                                    Screening Drive</button>
+                                <button class="btn btn-secondary" style="width:100%"
+                                    onclick="go(document.querySelector('[data-view=interviewers]'))">📥 Manage
+                                    Interviewer Roster</button>
+                                <button class="btn btn-ghost" style="width:100%"
+                                    onclick="go(document.querySelector('[data-view=candidates]'))">🌟 Review Shortlisted
+                                    Candidates</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SCREENING -->
+                <section class="view" id="view-screening">
+                    <div class="card" style="max-width:900px">
+                        <div class="section-head">
+                            <div>
+                                <h2>🚀 Launch Automated Candidate Screening Drive</h2>
+                                <div class="sub">AI reads resumes from Drive, scores against the role, shortlists &amp;
+                                    emails HR</div>
+                            </div>
+                        </div>
+                        <form id="batch-form" onsubmit="triggerBatchDrive(event)">
+                            <div class="form-grid">
+                                <div class="form-group" style="grid-column:1/-1">
+                                    <label>Google Spreadsheet Form Responses URL *</label>
+                                    <input type="text" id="spreadsheet_url" class="form-input"
+                                        placeholder="https://docs.google.com/spreadsheets/d/.../edit"
+                                        value="https://docs.google.com/spreadsheets/d/1ADbUgOVNNCAxFhZGpTxnOpHtmIeSF6MkMMyeI55ABQk/edit"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Google Drive Resume Folder URL (Optional)</label>
+                                    <input type="text" id="drive_folder_url" class="form-input"
+                                        placeholder="https://drive.google.com/drive/folders/...">
+                                </div>
+                                <div class="form-group">
+                                    <label>HR Recruiter Notification Email *</label>
+                                    <input type="email" id="hr_email" class="form-input" placeholder="hr@gwcdata.ai"
+                                        value="akashchandrasekar24@gmail.com" required>
+                                </div>
+                            </div>
+                            <button type="submit" id="btn-trigger" class="btn btn-primary"><span>⚡ Run Resume Screening
+                                    Drive</span></button>
+                        </form>
+                        <div id="alert-box"></div>
+                    </div>
+                </section>
+
+                <!-- INTERVIEWERS -->
+                <section class="view" id="view-interviewers">
+                    <div class="card">
+                        <div class="section-head">
+                            <div>
+                                <h2>👥 Technical Interviewer Workload &amp; Capacity</h2>
+                                <div class="sub">Upload the employee roster to manage interviewers &amp; track live
+                                    workloads.</div>
+                            </div>
+                            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                                <input type="file" id="roster-file-input" accept=".xlsx,.xls,.csv" style="display:none;"
+                                    onchange="handleRosterUpload(event)">
+                                <button onclick="document.getElementById('roster-file-input').click()"
+                                    id="btn-upload-roster" class="btn btn-primary btn-sm">📁 Upload Excel</button>
+                                <a href="/api/v1/interviews/template/excel"
+                                    download="GWC_Interviewer_Roster_Template.xlsx" class="btn btn-ghost btn-sm">📥
+                                    Template</a>
+                                <button onclick="clearRoster()" class="btn btn-ghost btn-sm"
+                                    style="color:#dc2626;border-color:#fca5a5;" title="Clear current roster">🗑️
+                                    Reset</button>
+                                <button onclick="loadWorkloads()" class="btn btn-ghost btn-sm">🔄 Refresh</button>
+                            </div>
+                        </div>
+                        <div id="roster-upload-alert"
+                            style="display:none;margin:0 0 14px;padding:12px 18px;border-radius:10px;font-size:13px;font-weight:600;">
+                        </div>
+                        <div class="workload-grid" id="workload-cards-container">
+                            <div style="grid-column:1/-1;text-align:center;color:var(--gray);padding:16px;">Loading
+                                interviewer capacities...</div>
+                        </div>
+                    </div>
+
+                    <!-- Employee Referrals Registry Card -->
+                    <div class="card" style="margin-top:20px;">
+                        <div class="section-head" style="flex-wrap:wrap;gap:10px;">
+                            <div>
+                                <h2>🌟 Employee Referrals Registry</h2>
+                                <div class="sub">Upload employee referrals to automatically cross-reference candidates
+                                    and flag AI rejections for HR review.</div>
+                            </div>
+                            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                                <input type="file" id="referrals-file-input" accept=".xlsx,.xls,.csv"
+                                    style="display:none;" onchange="handleReferralsUpload(event)">
+                                <button onclick="document.getElementById('referrals-file-input').click()"
+                                    id="btn-upload-referrals" class="btn btn-primary btn-sm"
+                                    style="background:var(--grad-po);border:none;">📁 Upload Referrals Excel</button>
+                                <a href="/api/v1/referrals/template/excel"
+                                    download="GWC_Employee_Referral_Template.xlsx" class="btn btn-ghost btn-sm">📥
+                                    Referral Template</a>
+                                <button onclick="clearReferrals()" class="btn btn-ghost btn-sm"
+                                    style="color:#dc2626;border-color:#fca5a5;" title="Clear current referrals">🗑️
+                                    Reset</button>
+                                <button onclick="loadReferrals()" class="btn btn-ghost btn-sm">🔄 Refresh</button>
+                            </div>
+                        </div>
+                        <div id="referrals-upload-alert"
+                            style="display:none;margin:0 0 14px;padding:12px 18px;border-radius:10px;font-size:13px;font-weight:600;">
+                        </div>
+                        <div class="table-responsive" style="margin-top:10px;">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Referred Candidate</th>
+                                        <th>Contact</th>
+                                        <th>Referred By (Employee)</th>
+                                        <th>Department</th>
+                                        <th>Notes / Relationship</th>
+                                        <th>Application Match Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="referrals-table-body">
+                                    <tr>
+                                        <td colspan="6" style="text-align:center;padding:18px;color:var(--gray);">
+                                            Loading registered referrals...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CANDIDATES -->
+                <section class="view" id="view-candidates">
+                    <div class="card">
+                        <div class="section-head" style="flex-wrap:wrap;gap:12px;">
+                            <div>
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <h2>🌟 Candidate Database &amp; HR Review Station</h2>
+                                    <span
+                                        style="font-size:11px;font-weight:700;color:var(--purple);background:#faf5ff;border:1px solid #e9d5ff;padding:2px 8px;border-radius:10px;">All
+                                        Scores &amp; Candidates</span>
+                                </div>
+                                <div class="sub">Comprehensive view of all screened applicants. Use the Filter By
+                                    controls below to filter across all columns.</div>
+                            </div>
+                            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                                <button class="btn btn-primary btn-sm" onclick="executeBulkApprove(true)"
+                                    style="background:#16a34a;border-color:#16a34a;font-weight:700;">⚡ Approve All
+                                    Pending</button>
+                            </div>
+                        </div>
+
+                        <!-- Multi-Column "Filter By" Toolbar Panel -->
+                        <div class="filter-panel"
+                            style="background:#faf8fc;border:1.5px solid #e9d5ff;border-radius:14px;padding:16px 18px;margin-bottom:18px;display:flex;flex-direction:column;gap:12px;">
+                            <div
+                                style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+                                <div
+                                    style="display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;color:var(--purple);">
+                                    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor"
+                                        stroke-width="2.2">
+                                        <path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z" />
+                                    </svg>
+                                    <span>Filter By Column:</span>
+                                </div>
+                                <div style="display:flex;align-items:center;gap:10px;">
+                                    <span id="filter-match-count"
+                                        style="font-size:12px;color:#64748b;font-weight:600;">Showing all
+                                        candidates</span>
+                                    <button type="button" onclick="resetAllFilters()" class="btn btn-ghost btn-sm"
+                                        style="font-size:11.5px;padding:4px 10px;border-radius:6px;border-color:#cbd5e1;">🔄
+                                        Reset Filters</button>
+                                </div>
+                            </div>
+
+                            <!-- Filter Controls Grid -->
+                            <div
+                                style="display:grid;grid-template-columns:repeat(auto-fit, minmax(170px, 1fr));gap:10px;">
+                                <!-- 1. Search Query -->
+                                <div>
+                                    <label
+                                        style="font-size:11px;font-weight:700;color:var(--gray);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.04em;">🔍
+                                        Keyword Search</label>
+                                    <input type="text" id="filter-search" class="form-input"
+                                        placeholder="Name, Email, ID, Notes..." oninput="applyFilters()"
+                                        style="width:100%;font-size:12.5px;padding:6px 10px;height:36px;">
+                                </div>
+
+                                <!-- 2. Job Role Filter -->
+                                <div>
+                                    <label
+                                        style="font-size:11px;font-weight:700;color:var(--gray);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.04em;">💼
+                                        Job Role</label>
+                                    <select id="filter-role" class="form-input" onchange="applyFilters()"
+                                        style="width:100%;font-size:12.5px;padding:6px 10px;height:36px;background:#fff;">
+                                        <option value="ALL">All Roles</option>
+                                        <option value="AI_ENGINEER">AI Engineer</option>
+                                        <option value="FULLSTACK_DEV">Full Stack Developer</option>
+                                        <option value="DATA_ANALYST">Data Analyst</option>
+                                        <option value="PYTHON_DEV">Python Developer</option>
+                                    </select>
+                                </div>
+
+                                <!-- 3. AI Score Range Filter -->
+                                <div>
+                                    <label
+                                        style="font-size:11px;font-weight:700;color:var(--gray);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.04em;">🎯
+                                        AI Score</label>
+                                    <select id="filter-score" class="form-input" onchange="applyFilters()"
+                                        style="width:100%;font-size:12.5px;padding:6px 10px;height:36px;background:#fff;">
+                                        <option value="ALL">All Scores (0 - 100)</option>
+                                        <option value="80+">⭐ Top Match (≥ 80)</option>
+                                        <option value="60-79">🟡 Review Match (60 - 79)</option>
+                                        <option value="<60">🔴 Low Score (&lt; 60)</option>
+                                    </select>
+                                </div>
+
+                                <!-- 4. AI Decision Filter -->
+                                <div>
+                                    <label
+                                        style="font-size:11px;font-weight:700;color:var(--gray);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.04em;">🤖
+                                        AI Decision</label>
+                                    <select id="filter-ai-decision" class="form-input" onchange="applyFilters()"
+                                        style="width:100%;font-size:12.5px;padding:6px 10px;height:36px;background:#fff;">
+                                        <option value="ALL">All AI Decisions</option>
+                                        <option value="SELECTED">AI Selected (Shortlisted)</option>
+                                        <option value="REJECTED">AI Rejected</option>
+                                        <option value="REVIEW">AI Review Pending</option>
+                                    </select>
+                                </div>
+
+                                <!-- 5. HR Approval Status Filter -->
+                                <div>
+                                    <label
+                                        style="font-size:11px;font-weight:700;color:var(--gray);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.04em;">🧑‍💼
+                                        HR Approval</label>
+                                    <select id="filter-approval" class="form-input" onchange="applyFilters()"
+                                        style="width:100%;font-size:12.5px;padding:6px 10px;height:36px;background:#fff;">
+                                        <option value="ALL">All Approval States</option>
+                                        <option value="PENDING_HR_APPROVAL">⏳ Pending HR Review</option>
+                                        <option value="HR_APPROVED">✅ HR Approved</option>
+                                        <option value="RE_EVALUATED">🔄 AI Re-Evaluated</option>
+                                        <option value="REJECTED_BY_HR">❌ Rejected by HR</option>
+                                        <option value="REFERRED_ONLY">🌟 Employee Referrals Only</option>
+                                        <option value="REFERRED_REJECTED">⚠️ Referred (AI Rejected Only)</option>
+                                    </select>
+                                </div>
+
+                                <!-- 6. Interview Scheduling Status Filter -->
+                                <div>
+                                    <label
+                                        style="font-size:11px;font-weight:700;color:var(--gray);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.04em;">📅
+                                        Interview Status</label>
+                                    <select id="filter-interview" class="form-input" onchange="applyFilters()"
+                                        style="width:100%;font-size:12.5px;padding:6px 10px;height:36px;background:#fff;">
+                                        <option value="ALL">All Interview States</option>
+                                        <option value="MEETING_FIXED">🟢 Meeting Fixed</option>
+                                        <option value="AWAITING_REPLY">🟡 Awaiting Reply</option>
+                                        <option value="UNASSIGNED">⚪ Unassigned</option>
+                                    </select>
+                                </div>
+
+                                <!-- 7. Sort By -->
+                                <div>
+                                    <label
+                                        style="font-size:11px;font-weight:700;color:var(--gray);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.04em;">⚡
+                                        Sort By</label>
+                                    <select id="filter-sort" class="form-input" onchange="applyFilters()"
+                                        style="width:100%;font-size:12.5px;padding:6px 10px;height:36px;background:#fff;">
+                                        <option value="score-desc">Score: High to Low</option>
+                                        <option value="score-asc">Score: Low to High</option>
+                                        <option value="name-asc">Name: A to Z</option>
+                                        <option value="role-asc">Job Role</option>
+                                    </select>
+                                </div>
+                            </div>
+                        <!-- Recruitment Batch Workflow Status Banner -->
+                        <div id="batch-workflow-banner"
+                            style="margin-bottom:16px;padding:12px 18px;border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:14px;background:#f8fafc;border:1px solid #e2e8f0;box-shadow:0 2px 8px rgba(0,0,0,0.03);flex-wrap:wrap;">
+                            <div style="display:flex;align-items:center;gap:12px;">
+                                <div id="batch-status-icon"
+                                    style="width:36px;height:36px;border-radius:9px;background:#fef3c7;color:#d97706;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">
+                                    ⏳</div>
+                                <div>
+                                    <div id="batch-status-title"
+                                        style="font-size:13.5px;font-weight:700;color:#0f172a;">Active Candidate Review
+                                        Stage</div>
+                                    <div id="batch-status-subtitle" style="font-size:12px;color:#64748b;">Review AI
+                                        scores, override approvals, and assign interviewers. Once ready, click <b>Finalize &amp; Dispatch</b> to cook the CSV, organize Drive folders, and send emails.</div>
+                                </div>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:8px;">
+                                <button onclick="openFinalizeModal()" id="btn-banner-finalize" class="btn btn-sm"
+                                    style="background:#16a34a;color:#fff;font-weight:700;padding:7px 16px;border-radius:8px;border:none;white-space:nowrap;cursor:pointer;">⚡ Finalize &amp; Dispatch</button>
+                            </div>
+                        </div>
+
+                        <!-- Sticky/Dynamic Bulk Selection Action Bar -->
+                        <div id="bulk-action-bar"
+                            style="display:none;background:linear-gradient(135deg,#7030B1 0%,#B56DD3 55%,#FF6B00 100%);color:#fff;border-radius:12px;padding:12px 18px;margin-bottom:14px;align-items:center;justify-content:space-between;box-shadow:0 10px 20px -5px rgba(112,48,177,0.3);flex-wrap:wrap;gap:10px;">
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <span style="font-size:18px;">📌</span>
+                                <span id="bulk-selected-count" style="font-weight:700;font-size:13.5px;">0
+                                    Selected</span>
+                            </div>
+                            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                                <button class="btn btn-sm" id="btn-bulk-approve" onclick="executeBulkApprove(false)"
+                                    style="background:#16a34a;color:#fff;border:none;font-weight:700;padding:6px 14px;border-radius:6px;cursor:pointer;">✅
+                                    Bulk Approve Selected</button>
+                                <button class="btn btn-sm" onclick="executeBulkReject()"
+                                    style="background:#dc2626;color:#fff;border:none;font-weight:600;padding:6px 12px;border-radius:6px;cursor:pointer;">❌
+                                    Bulk Reject Selected</button>
+                                <button class="btn btn-sm" onclick="clearCandidateSelection()"
+                                    style="background:rgba(255,255,255,0.2);color:#fff;border:1px solid rgba(255,255,255,0.4);padding:6px 10px;border-radius:6px;font-size:12px;cursor:pointer;">Deselect
+                                    All</button>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th style="width:36px;text-align:center;"><input type="checkbox"
+                                                id="select-all-candidates" onchange="toggleSelectAll(this)"
+                                                style="cursor:pointer;transform:scale(1.15);"></th>
+                                        <th>Candidate</th>
+                                        <th>Job Role</th>
+                                        <th>AI Decision</th>
+                                        <th>AI Score</th>
+                                        <th>HR Review Status</th>
+                                        <th>Assigned Interviewer</th>
+                                        <th>Interview Status</th>
+                                        <th style="text-align:right;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="candidate-table-body">
+                                    <tr>
+                                        <td colspan="9" style="text-align:center;padding:24px;color:var(--gray);">
+                                            Loading candidates...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Candidate Detail Drawer -->
+    <div class="drawer-overlay" id="drawer-ov" onclick="closeDrawer()"></div>
+    <aside class="drawer" id="drawer" aria-hidden="true">
+        <div class="drawer-head">
+            <button class="drawer-close" onclick="closeDrawer()" aria-label="Close">&times;</button>
+            <h3 id="d-name">Candidate</h3>
+            <div class="role" id="d-role">Role</div>
+        </div>
+        <div class="drawer-tabs">
+            <div class="dtab active" data-tab="profile" onclick="dtab(this)">Profile &amp; Review</div>
+            <div class="dtab" data-tab="reason" onclick="dtab(this)">AI Reasoning</div>
+            <div class="dtab" data-tab="kit" onclick="dtab(this)">Question Kit</div>
+        </div>
+        <div class="drawer-body">
+            <div class="dpanel active" id="panel-profile">
+                <!-- Candidate Details -->
+                <div class="kv"><span>Candidate ID</span><span id="d-id">—</span></div>
+                <div class="kv"><span>Email</span><span id="d-email">—</span></div>
+                <div class="kv"><span>Phone</span><span id="d-phone">—</span></div>
+                <div class="kv"><span>AI Decision</span><span id="d-ai-decision">—</span></div>
+                <div class="kv"><span>Weighted Score</span><span id="d-score" style="color:var(--purple)">—</span></div>
+                <div class="kv"><span>ATS Match Score</span><span id="d-ats-score" style="font-weight:800;color:#16a34a;">—</span></div>
+                <div class="kv"><span>HR Approval</span><span id="d-approval-pill">—</span></div>
+                <div class="kv"><span>Interview Status</span><span id="d-status">—</span></div>
+                <div id="d-teams" style="margin-top:6px;"></div>
+
+                <!-- ATS & Job Description Keyword Match Card -->
+                <div id="d-ats-box"
+                    style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:12px;padding:12px 14px;margin:12px 0;box-shadow:0 2px 6px rgba(0,0,0,0.02);">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                        <span style="font-size:12px;font-weight:800;color:#1e1b4b;display:flex;align-items:center;gap:6px;">
+                            🎯 Job Description (JD) Keyword Match
+                        </span>
+                        <span id="d-ats-verdict-badge" style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;background:#f0fdf4;color:#16a34a;border:1px solid #86efac;">—</span>
+                    </div>
+                    <div style="font-size:11.5px;color:#64748b;margin-bottom:8px;line-height:1.4;" id="d-ats-summary-text">—</div>
+                    <div style="margin-bottom:6px;">
+                        <div style="font-size:11px;font-weight:700;color:#15803d;margin-bottom:4px;">✅ Matched JD Keywords:</div>
+                        <div id="d-ats-matched-kws" style="display:flex;flex-wrap:wrap;gap:4px;">—</div>
+                    </div>
+                    <div>
+                        <div style="font-size:11px;font-weight:700;color:#b91c1c;margin-bottom:4px;">❌ Missing JD Target Skills:</div>
+                        <div id="d-ats-missing-kws" style="display:flex;flex-wrap:wrap;gap:4px;">—</div>
+                    </div>
+                </div>
+
+
+                <!-- Employee Referral Info Banner -->
+                <div id="d-referral-box"
+                    style="display:none;background:linear-gradient(135deg,#faf5ff 0%,#f5f3ff 100%);border:1.5px solid #c084fc;border-radius:12px;padding:14px 16px;margin:16px 0 12px;box-shadow:0 4px 12px rgba(112,48,177,0.06);">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                        <span
+                            style="font-size:12px;font-weight:800;color:var(--purple);text-transform:uppercase;letter-spacing:.04em;display:flex;align-items:center;gap:6px;">
+                            <span>🌟 Internal Employee Referral</span>
+                        </span>
+                        <span id="d-referral-badge"
+                            style="background:#f3e8ff;color:#7e22ce;font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;border:1px solid #d8b4fe;">Active
+                            Referral</span>
+                    </div>
+                    <div style="font-size:13px;color:#1e1b4b;font-weight:600;margin-bottom:4px;"
+                        id="d-referral-referrer">—</div>
+                    <div style="font-size:12px;color:#6b21a8;background:#ffffff;border:1px solid #e9d5ff;border-radius:8px;padding:8px 12px;line-height:1.4;"
+                        id="d-referral-notes">—</div>
+                    <div id="d-referral-alert-msg"
+                        style="display:none;margin-top:8px;font-size:12px;color:#991b1b;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:8px 12px;line-height:1.4;font-weight:600;">
+                    </div>
+                </div>
+
+                <!-- Human in the Loop Review Station (Moved Below Profile) -->
+                <div id="d-hitl-banner"
+                    style="background:#faf5ff;border:1.5px solid #d8b4fe;border-radius:12px;padding:14px 16px;margin:16px 0;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                        <span
+                            style="font-size:12px;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:.04em;">🧑‍💼
+                            Human-in-the-Loop Review</span>
+                        <span id="d-hitl-badge">—</span>
+                    </div>
+                    <div id="d-hitl-feedback-note"
+                        style="display:none;font-size:12.5px;color:#4c1d95;background:#fff;border:1px solid #e9d5ff;border-radius:8px;padding:8px 12px;margin-bottom:10px;line-height:1.4;">
+                    </div>
+                    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                        <button class="btn btn-primary btn-sm" id="btn-drawer-approve"
+                            onclick="approveCurrentDrawerCandidate()"
+                            style="flex:1;min-width:130px;background:#16a34a;border-color:#16a34a;">✅ Approve for
+                            Interview</button>
+                        <button class="btn btn-ghost btn-sm" onclick="openFeedbackModal(currentDrawerCandidateId)"
+                            style="flex:1;min-width:130px;border-color:var(--purple);color:var(--purple);font-weight:600;">💬
+                            Feedback &amp; Re-Eval</button>
+                        <button class="btn btn-ghost btn-sm" onclick="rejectCurrentDrawerCandidate()"
+                            style="color:#dc2626;border-color:#fca5a5;" title="Reject candidate">❌ Reject</button>
+                    </div>
+                </div>
+
+                <div
+                    style="font-size:12px;font-weight:700;color:var(--purple);margin-top:16px;text-transform:uppercase;letter-spacing:.04em;display:flex;align-items:center;gap:6px;">
+                    <span>🤖 AI Interviewer Recommendation Matches</span>
+                </div>
+                <div id="d-recommendation-cards" style="margin-top:8px;display:flex;flex-direction:column;gap:8px;">
+                </div>
+
+                <div id="d-assign-gate-note"
+                    style="display:none;font-size:12px;color:#c2410c;background:#fff7ed;border:1px solid #ffedd5;padding:8px 12px;border-radius:8px;margin:10px 0 6px;">
+                    🔒 <strong>Interviewer Assignment Locked:</strong> Please approve the candidate above to enable
+                    interviewer assignment.
+                </div>
+
+                <div
+                    style="font-size:11px;font-weight:600;color:var(--gray);margin-top:12px;text-transform:uppercase;letter-spacing:.04em;">
+                    Or Select from Complete Roster:</div>
+                <div class="assign-row" id="d-assign-container" style="margin-top:6px;">
+                    <select id="drawer-select" class="select-interviewer">
+                        <option>-- Select Technical Interviewer --</option>
+                    </select>
+                    <button class="btn btn-primary btn-sm" id="btn-drawer-assign" onclick="assignFromDrawer()">📨 Assign
+                        &amp; Request</button>
+                </div>
+            </div>
+            <div class="dpanel" id="panel-reason">
+                <div style="font-size:13px;font-weight:600;color:var(--purple);margin-bottom:4px;">Why the AI screened
+                    this candidate</div>
+                <div class="reason-box" id="d-reason">—</div>
+            </div>
+            <div class="dpanel" id="panel-kit">
+                <div id="kit-body">
+                    <div style="text-align:center;padding:30px;color:var(--gray);font-size:13px;">Open this tab to
+                        generate the AI question kit.</div>
+                </div>
+            </div>
+        </div>
+        <div class="drawer-foot">
+            <button class="btn btn-ghost btn-sm" onclick="downloadQuestionsDocx()">📥 Download .docx</button>
+            <button class="btn btn-primary btn-sm" id="btn-email-docx" onclick="emailQuestionsDocx()">📎 Email Kit to
+                Interviewer</button>
+        </div>
+    </aside>
+
+    <!-- Human-in-the-Loop AI Feedback & Re-Evaluation Modal -->
+    <div id="feedback-modal"
+        style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(15,23,42,0.65);backdrop-filter:blur(4px);z-index:9999;justify-content:center;align-items:center;">
+        <div
+            style="background:#ffffff;width:90%;max-width:680px;border-radius:20px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);overflow:hidden;border:1px solid #e9d5ff;display:flex;flex-direction:column;max-height:90vh;">
+            <!-- Header -->
+            <div
+                style="background:linear-gradient(135deg,#7030B1 0%,#B56DD3 60%,#FF6B00 100%);padding:20px 24px;color:#fff;display:flex;justify-content:space-between;align-items:center;">
+                <div>
+                    <h3 style="margin:0;font-size:18px;font-weight:700;">🧑‍💼 Human-in-the-Loop AI Feedback &amp;
+                        Re-Evaluation Studio</h3>
+                    <div id="fb-modal-cand-info" style="font-size:13px;opacity:0.95;margin-top:2px;">Guide Gemini AI to
+                        re-assess the candidate</div>
+                </div>
+                <button onclick="closeFeedbackModal()"
+                    style="background:rgba(255,255,255,0.2);border:none;color:#fff;font-size:20px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">&times;</button>
+            </div>
+
+            <!-- Body -->
+            <div style="padding:22px 24px;overflow-y:auto;flex:1;">
+                <div
+                    style="background:#faf8fc;border:1px solid #e9d5ff;border-radius:12px;padding:12px 16px;margin-bottom:16px;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+                        <strong style="color:var(--purple);font-size:13.5px;" id="fb-modal-name">Candidate Name</strong>
+                        <span style="font-size:13px;font-weight:700;color:var(--purple);" id="fb-modal-score">Score:
+                            85/100</span>
+                    </div>
+                    <div style="font-size:12.5px;color:#475569;line-height:1.4;" id="fb-modal-prev-reason">Previous AI
+                        reasoning...</div>
+                </div>
+
+                <label style="font-size:13px;font-weight:700;color:#1e293b;display:block;margin-bottom:6px;">
+                    💬 Your Feedback &amp; Evaluation Guidance for AI:
+                </label>
+                <textarea id="hr-feedback-text" class="form-input" rows="4"
+                    style="width:100%;font-size:13.5px;line-height:1.5;resize:vertical;border:1.5px solid #cbd5e1;border-radius:10px;"
+                    placeholder="E.g. 'Candidate has strong production experience in PyTorch and AWS deployments. Please re-evaluate their machine learning engineering score and adjust upwards.'"></textarea>
+
+                <!-- Quick Prompt Suggestions Chips -->
+                <div style="margin:10px 0 16px;">
+                    <div
+                        style="font-size:11.5px;font-weight:600;color:var(--gray);margin-bottom:6px;text-transform:uppercase;">
+                        ⚡ Quick Guidance Templates:</div>
+                    <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                        <button type="button" class="btn btn-ghost btn-sm"
+                            style="font-size:11px;padding:4px 10px;border-radius:14px;background:#f8fafc;"
+                            onclick="setFeedbackTemplate('Candidate has strong hands-on production experience in cloud infrastructure and Docker/FastAPI microservices. Please re-evaluate and increase score.')">⭐
+                            Boost Cloud/Backend</button>
+                        <button type="button" class="btn btn-ghost btn-sm"
+                            style="font-size:11px;padding:4px 10px;border-radius:14px;background:#f8fafc;"
+                            onclick="setFeedbackTemplate('Re-verify deep expertise in PyTorch and Deep Learning model training; adjust score based on verified projects.')">🔍
+                            Focus on PyTorch/DL</button>
+                        <button type="button" class="btn btn-ghost btn-sm"
+                            style="font-size:11px;padding:4px 10px;border-radius:14px;background:#f8fafc;"
+                            onclick="setFeedbackTemplate('Candidate lacks required commercial experience in this specific stack; adjust score down and recommend review.')">⚠️
+                            Flag Insufficient Stack Depth</button>
+                        <button type="button" class="btn btn-ghost btn-sm"
+                            style="font-size:11px;padding:4px 10px;border-radius:14px;background:#f8fafc;"
+                            onclick="setFeedbackTemplate('Candidate shows high aptitude in GenAI/RAG pipelines with LangChain. Increase screening score.')">🤖
+                            Prioritize GenAI/RAG</button>
+                    </div>
+                </div>
+
+                <!-- Re-Evaluation Result Container (Populated after AI runs) -->
+                <div id="re-eval-result-box"
+                    style="display:none;background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:16px;margin-top:14px;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                        <strong style="color:#15803d;font-size:14px;">✨ Gemini AI Re-Evaluation Result</strong>
+                        <span style="font-size:14px;font-weight:800;color:#15803d;" id="re-eval-new-score">New Score:
+                            92/100</span>
+                    </div>
+                    <div style="font-size:13px;color:#1e293b;line-height:1.5;margin-bottom:12px;"
+                        id="re-eval-new-reason">New AI Reasoning...</div>
+                    <div style="display:flex;gap:8px;">
+                        <button type="button" class="btn btn-primary btn-sm" id="btn-approve-revised"
+                            onclick="approveWithRevisedScore()"
+                            style="background:#16a34a;border-color:#16a34a;font-weight:700;">
+                            ✅ Approve with Revised Score
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div
+                style="padding:14px 24px;background:#faf8fc;border-top:1px solid #f3e8ff;display:flex;justify-content:space-between;align-items:center;">
+                <button type="button" class="btn btn-ghost btn-sm" onclick="closeFeedbackModal()">Cancel</button>
+                <button type="button" class="btn btn-primary btn-sm" id="btn-run-re-eval"
+                    onclick="submitFeedbackReEvaluation()" style="padding:8px 18px;font-weight:700;">
+                    🚀 Run AI Re-Evaluation (Gemini)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Live System Logs & Debug Console Modal -->
+    <div id="logs-modal"
+        style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(15,23,42,0.7);backdrop-filter:blur(5px);z-index:99999;justify-content:center;align-items:center;">
+        <div
+            style="background:#0f172a;color:#f8fafc;width:92%;max-width:1050px;height:85vh;border-radius:18px;box-shadow:0 25px 60px -15px rgba(0,0,0,0.5);overflow:hidden;border:1px solid #334155;display:flex;flex-direction:column;">
+            <!-- Header -->
+            <div
+                style="background:#1e293b;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #334155;">
+                <div style="display:flex;align-items:center;gap:12px;">
+                    <div
+                        style="background:#3b82f6;color:#fff;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:16px;">
+                        📋</div>
+                    <div>
+                        <h3 style="margin:0;font-size:16px;font-weight:700;color:#f1f5f9;">Live System Logs &amp;
+                            Operational Debug Trace</h3>
+                        <div style="font-size:11.5px;color:#94a3b8;">Detailed logs saved to
+                            <code>logs/workflow.log</code>
+                        </div>
+                    </div>
+                </div>
+                <div style="display:flex;gap:10px;align-items:center;">
+                    <button onclick="fetchLiveLogs()" class="btn btn-sm btn-ghost"
+                        style="color:#38bdf8;border-color:#38bdf8;padding:4px 12px;font-size:12px;">🔄 Refresh</button>
+                    <a href="/api/v1/system/download-logs" target="_blank" class="btn btn-sm btn-primary"
+                        style="background:#2563eb;border:none;padding:4px 14px;font-size:12px;text-decoration:none;display:inline-flex;align-items:center;gap:4px;">📥
+                        Download Full .log</a>
+                    <button onclick="closeLogsModal()"
+                        style="background:#334155;border:none;color:#cbd5e1;font-size:20px;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">&times;</button>
+                </div>
+            </div>
+
+            <!-- Filter Toolbar -->
+            <div
+                style="background:#131d31;padding:10px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e293b;font-size:12px;">
+                <div style="display:flex;gap:8px;align-items:center;">
+                    <span style="color:#94a3b8;">Filter Logs:</span>
+                    <input type="text" id="log-search-filter" oninput="filterLogsInViewer()"
+                        placeholder="Search keyword (e.g. 'SHORTLISTED', 'CAN-', 'Error')..."
+                        style="background:#1e293b;border:1px solid #475569;color:#f8fafc;padding:4px 10px;border-radius:6px;font-size:12px;width:280px;">
+                </div>
+                <div style="color:#64748b;font-size:11.5px;">
+                    Showing last <span id="log-line-count">150</span> lines
+                </div>
+            </div>
+
+            <!-- Terminal Output Window -->
+            <pre id="log-terminal-body"
+                style="flex:1;margin:0;padding:16px 20px;overflow-y:auto;font-family:'Courier New',Courier,monospace;font-size:12.5px;line-height:1.55;color:#e2e8f0;background:#090d16;white-space:pre-wrap;word-break:break-all;">Loading live system logs...</pre>
+        </div>
+    </div>
+
+    <!-- Finalize Recruitment Batch Confirmation Modal -->
+    <div id="finalize-modal"
+        style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(15,23,42,0.7);backdrop-filter:blur(5px);z-index:99999;justify-content:center;align-items:center;">
+        <div
+            style="background:#ffffff;color:#0f172a;width:92%;max-width:600px;border-radius:18px;box-shadow:0 25px 60px -15px rgba(0,0,0,0.4);overflow:hidden;border:1px solid #e2e8f0;display:flex;flex-direction:column;">
+            <!-- Modal Header -->
+            <div
+                style="background:linear-gradient(135deg,#7030B1 0%,#16a34a 100%);padding:18px 24px;display:flex;justify-content:space-between;align-items:center;color:#fff;">
+                <div style="display:flex;align-items:center;gap:12px;">
+                    <div
+                        style="background:rgba(255,255,255,0.2);width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;">
+                        ⚡</div>
+                    <div>
+                        <h3 style="margin:0;font-size:17px;font-weight:800;color:#fff;">Finalize &amp; Dispatch
+                            Recruitment Batch</h3>
+                        <div style="font-size:12px;opacity:0.9;">Lock decisions, prepare official CSV ledger &amp; send
+                            emails</div>
+                    </div>
+                </div>
+                <button onclick="closeFinalizeModal()"
+                    style="background:rgba(0,0,0,0.2);border:none;color:#fff;font-size:20px;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">&times;</button>
+            </div>
+
+            <!-- Modal Body -->
+            <div style="padding:22px 24px;overflow-y:auto;max-height:70vh;">
+                <div
+                    style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:14px 18px;margin-bottom:16px;">
+                    <div style="font-weight:700;font-size:13px;color:#334155;margin-bottom:8px;">📊 Batch Review
+                        Summary</div>
+                    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center;">
+                        <div style="background:#fff;padding:10px;border-radius:8px;border:1px solid #e2e8f0;">
+                            <div style="font-size:20px;font-weight:800;color:#16a34a;" id="fin-count-shortlisted">0
+                            </div>
+                            <div style="font-size:11px;color:#64748b;font-weight:600;">Selected / Approved</div>
+                        </div>
+                        <div style="background:#fff;padding:10px;border-radius:8px;border:1px solid #e2e8f0;">
+                            <div style="font-size:20px;font-weight:800;color:#dc2626;" id="fin-count-rejected">0</div>
+                            <div style="font-size:11px;color:#64748b;font-weight:600;">Rejected</div>
+                        </div>
+                        <div style="background:#fff;padding:10px;border-radius:8px;border:1px solid #e2e8f0;">
+                            <div style="font-size:20px;font-weight:800;color:#7030B1;" id="fin-count-assigned">0</div>
+                            <div style="font-size:11px;color:#64748b;font-weight:600;">Interviewers Assigned</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="font-size:13px;color:#334155;line-height:1.6;margin-bottom:16px;">
+                    <b>Executing this action will perform the following operations in the backend:</b>
+                    <ul style="margin:8px 0 0 18px;padding:0;color:#475569;">
+                        <li>☁️ <b>Push to Domo Webform / DataSet:</b> Uploads and synchronizes all candidate records directly to your Domo cloud dataset.</li>
+                        <li>📝 <b>Cook Official CSV &amp; Excel Ledger:</b> Writes <code>screening_results.csv</code>
+                            with Date column (Col 1), final scores, and full Google Drive resume links (Col 23).</li>
+                        <li>📁 <b>Google Drive Organization:</b> Moves all candidate resumes into <code>Selected/</code>
+                            and <code>Rejected/</code> folders.</li>
+                        <li>✉️ <b>Employee Emails:</b> Dispatches interview availability requests with attached Question
+                            Kits to assigned Technical Interviewers.</li>
+                        <li>📩 <b>HR Ultimate List:</b> Sends executive summary digest email with the newly cooked CSV
+                            ledger attached to HR.</li>
+                    </ul>
+                </div>
+
+                <div
+                    style="background:#fef3c7;border:1px solid #fde68a;border-radius:10px;padding:10px 14px;display:flex;gap:10px;align-items:center;font-size:12px;color:#92400e;">
+                    <span>⚠️</span>
+                    <span>Before clicking final dispatch, verify that you have assigned technical interviewers to all
+                        shortlisted candidates.</span>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div
+                style="padding:14px 24px;background:#f8fafc;border-top:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;">
+                <button type="button" class="btn btn-ghost btn-sm" onclick="closeFinalizeModal()">Cancel / Keep
+                    Reviewing</button>
+                <button type="button" class="btn btn-sm" id="btn-execute-finalize" onclick="executeFinalizeBatch()"
+                    style="background:linear-gradient(135deg,#16a34a,#059669);color:#fff;font-weight:800;padding:9px 20px;border-radius:8px;border:none;cursor:pointer;box-shadow:0 4px 12px rgba(22,163,74,0.3);">
+                    🚀 Finalize &amp; Dispatch Now
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Job Descriptions (JD) & ATS Keyword Configuration Modal -->
+    <div id="jd-modal"
+        style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(15,23,42,0.7);backdrop-filter:blur(5px);z-index:99999;justify-content:center;align-items:center;">
+        <div
+            style="background:#ffffff;color:#0f172a;width:94%;max-width:820px;max-height:90vh;border-radius:18px;box-shadow:0 25px 60px -15px rgba(0,0,0,0.4);overflow:hidden;border:1px solid #e2e8f0;display:flex;flex-direction:column;">
+            <!-- Modal Header -->
+            <div
+                style="background:linear-gradient(135deg,#7030B1 0%,#4f46e5 100%);padding:18px 24px;display:flex;justify-content:space-between;align-items:center;color:#fff;">
+                <div style="display:flex;align-items:center;gap:12px;">
+                    <div
+                        style="background:rgba(255,255,255,0.2);width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;">
+                        📋</div>
+                    <div>
+                        <h3 style="margin:0;font-size:17px;font-weight:800;color:#fff;">Job Descriptions (JD) &amp; ATS Keyword Match Rules</h3>
+                        <div style="font-size:12px;opacity:0.9;">Configure role Job Descriptions, core duties &amp; target ATS screening keywords</div>
+                    </div>
+                </div>
+                <button onclick="closeJDModal()"
+                    style="background:rgba(255,255,255,0.2);border:none;color:#fff;font-size:22px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">&times;</button>
+            </div>
+
+            <!-- Role Selector Tabs -->
+            <div style="background:#f1f5f9;padding:10px 24px;display:flex;gap:10px;border-bottom:1px solid #e2e8f0;">
+                <button type="button" class="btn btn-sm jd-role-tab active" id="jd-tab-ai" onclick="switchJDRoleTab('AI_ENGINEER')"
+                    style="background:#7030b1;color:#fff;font-weight:700;border:none;border-radius:8px;padding:6px 14px;">🤖 AI Engineer</button>
+                <button type="button" class="btn btn-sm jd-role-tab" id="jd-tab-fs" onclick="switchJDRoleTab('FULLSTACK_DEV')"
+                    style="background:#e2e8f0;color:#475569;font-weight:600;border:none;border-radius:8px;padding:6px 14px;">💻 Full Stack Developer</button>
+                <button type="button" class="btn btn-sm jd-role-tab" id="jd-tab-da" onclick="switchJDRoleTab('DATA_ANALYST')"
+                    style="background:#e2e8f0;color:#475569;font-weight:600;border:none;border-radius:8px;padding:6px 14px;">📊 Data Analyst</button>
+            </div>
+
+            <!-- Modal Body (Scrollable) -->
+            <div style="padding:20px 24px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:14px;">
+                <div id="jd-alert-box" style="display:none;padding:10px 14px;border-radius:8px;font-size:12.5px;font-weight:600;"></div>
+
+                <div class="form-group">
+                    <label style="font-weight:700;font-size:12.5px;color:#1e1b4b;margin-bottom:4px;display:block;">Role Title</label>
+                    <input type="text" id="jd-input-title" class="form-input" style="width:100%;padding:8px 12px;border:1.5px solid #cbd5e1;border-radius:8px;font-size:13px;">
+                </div>
+
+                <div class="form-group">
+                    <label style="font-weight:700;font-size:12.5px;color:#1e1b4b;margin-bottom:4px;display:block;">Job Description (Mission, Overview &amp; Context)</label>
+                    <textarea id="jd-input-desc" rows="4" style="width:100%;padding:10px 12px;border:1.5px solid #cbd5e1;border-radius:8px;font-size:12.5px;line-height:1.45;resize:vertical;font-family:inherit;"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label style="font-weight:700;font-size:12.5px;color:#1e1b4b;margin-bottom:4px;display:block;">Core Responsibilities &amp; Deliverables (One per line)</label>
+                    <textarea id="jd-input-resp" rows="4" style="width:100%;padding:10px 12px;border:1.5px solid #cbd5e1;border-radius:8px;font-size:12px;line-height:1.45;resize:vertical;font-family:inherit;"></textarea>
+                </div>
+
+                <div style="background:#faf8fc;border:1.5px solid #e9d5ff;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:12px;">
+                    <div style="font-size:13px;font-weight:800;color:var(--purple);display:flex;align-items:center;gap:6px;">
+                        <span>🎯 Target ATS Keywords (Heavy Weightage Matching)</span>
+                    </div>
+
+                    <div>
+                        <label style="font-weight:700;font-size:12px;color:#15803d;margin-bottom:3px;display:block;">Mandatory Technical Skills (Must-Have, 35% Weightage)</label>
+                        <input type="text" id="jd-input-kws-mand" class="form-input" style="width:100%;padding:7px 12px;border:1.5px solid #86efac;border-radius:8px;font-size:12.5px;" placeholder="Python, PyTorch, TensorFlow, Machine Learning (comma-separated)">
+                    </div>
+
+                    <div>
+                        <label style="font-weight:700;font-size:12px;color:#1d4ed8;margin-bottom:3px;display:block;">Preferred Core Frameworks &amp; Tools (25% Weightage)</label>
+                        <input type="text" id="jd-input-kws-pref" class="form-input" style="width:100%;padding:7px 12px;border:1.5px solid #bfdbfe;border-radius:8px;font-size:12.5px;" placeholder="LLM, GenAI, RAG, LangChain, LlamaIndex, Vector Database (comma-separated)">
+                    </div>
+
+                    <div>
+                        <label style="font-weight:700;font-size:12px;color:#6b7280;margin-bottom:3px;display:block;">Good-to-Have Bonus Tools &amp; Cloud (Bonus Buffer)</label>
+                        <input type="text" id="jd-input-kws-good" class="form-input" style="width:100%;padding:7px 12px;border:1.5px solid #cbd5e1;border-radius:8px;font-size:12.5px;" placeholder="Docker, Kubernetes, GCP, AWS, SQL, Pandas (comma-separated)">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div
+                style="padding:14px 24px;background:#f8fafc;border-top:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;">
+                <button type="button" class="btn btn-ghost btn-sm" onclick="closeJDModal()">Cancel</button>
+                <button type="button" class="btn btn-sm" id="btn-save-jd" onclick="saveActiveRoleJD()"
+                    style="background:linear-gradient(135deg,#7030B1,#4f46e5);color:#fff;font-weight:800;padding:9px 20px;border-radius:8px;border:none;cursor:pointer;box-shadow:0 4px 12px rgba(112,48,177,0.35);">
+                    💾 Save Job Description &amp; ATS Rules
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allCandidateRecords = [];
+        let displayedRecords = [];
+        let shortlistedRecords = [];
+        let interviewerList = [];
+        let referralsList = [];
+        let totalCandidatesCount = 0;
+        let selectedCandidateIds = new Set();
+        let currentDrawerCandidateId = null;
+        let currentDrawerCandidate = null;
+        let kitLoadedFor = null;
+        let feedbackTargetCandidateId = null;
+        let lastReEvalResult = null;
+        let rawLogText = "";
+
+        /* ---------- Live Logs Viewer ---------- */
+        async function openLogsModal() {
+            document.getElementById("logs-modal").style.display = "flex";
+            await fetchLiveLogs();
+        }
+
+        function closeLogsModal() {
+            document.getElementById("logs-modal").style.display = "none";
+        }
+
+        async function fetchLiveLogs() {
+            const term = document.getElementById("log-terminal-body");
+            term.textContent = "⏳ Fetching latest logs from logs/workflow.log...";
+            try {
+                const res = await fetch("/api/v1/system/logs?lines=200");
+                rawLogText = await res.text();
+                filterLogsInViewer();
+            } catch (err) {
+                term.textContent = "❌ Failed to load logs: " + err.message;
+            }
+        }
+
+        function filterLogsInViewer() {
+            const query = (document.getElementById("log-search-filter").value || "").toLowerCase();
+            const term = document.getElementById("log-terminal-body");
+            if (!query) {
+                term.textContent = rawLogText || "No log entries found.";
+            } else {
+                const lines = rawLogText.split("\n");
+                const matched = lines.filter(l => l.toLowerCase().includes(query));
+                term.textContent = matched.join("\n") || "No log lines match your filter: " + query;
+            }
+            term.scrollTop = term.scrollHeight;
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            loadCandidates();
+            loadWorkloads();
+            loadReferrals();
+        });
+
+
+        /* ---------- View navigation ---------- */
+        const PAGES = {
+            overview: ['HR Recruitment Command Center', 'Real-time pipeline, interviewer capacity & AI-scheduled interviews'],
+            screening: ['Screening Drive', 'Launch an automated AI resume-screening run'],
+            interviewers: ['Technical Interviewers', 'Monitor workload & capacity across domains'],
+            candidates: ['Selected Candidates', 'Shortlisted talent & interviewer assignments']
+        };
+        function go(elem) {
+            const v = elem.getAttribute('data-view');
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.toggle('active', n.getAttribute('data-view') === v));
+            document.querySelectorAll('.view').forEach(s => s.classList.remove('active'));
+            document.getElementById('view-' + v).classList.add('active');
+            document.getElementById('page-title').textContent = PAGES[v][0];
+            document.getElementById('page-sub').textContent = PAGES[v][1];
+            document.getElementById('sidebar').classList.remove('open');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /* ---------- Toast ---------- */
+        function toast(title, msg, isErr) {
+            const w = document.getElementById('toasts');
+            const d = document.createElement('div');
+            d.className = 'toast' + (isErr ? ' err' : '');
+            d.innerHTML = `<span>${isErr ? '❌' : '✅'}</span><div><b>${title}</b>${msg ? '<br><span style="color:#64748b">' + msg + '</span>' : ''}</div>`;
+            w.appendChild(d);
+            setTimeout(() => { d.style.transition = 'opacity .4s, transform .4s'; d.style.opacity = '0'; d.style.transform = 'translateX(40px)'; setTimeout(() => d.remove(), 400); }, 3600);
+        }
+
+        /* ---------- Workloads ---------- */
+        async function loadWorkloads() {
+            try {
+                const res = await fetch("/api/v1/interviews/workloads");
+                const data = await res.json();
+                if (data.status === "SUCCESS") {
+                    interviewerList = data.interviewers;
+                    renderWorkloadCards(interviewerList);
+                    if (shortlistedRecords.length > 0) renderTable(shortlistedRecords);
+                }
+            } catch (err) { console.error("Error loading workloads:", err); }
+        }
+
+        async function handleRosterUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const btn = document.getElementById("btn-upload-roster");
+            const alertBox = document.getElementById("roster-upload-alert");
+            btn.disabled = true; btn.innerHTML = `<span>⏳ Uploading...</span>`; alertBox.style.display = "none";
+            const formData = new FormData(); formData.append("file", file);
+            try {
+                const res = await fetch("/api/v1/interviews/upload-roster", { method: "POST", body: formData });
+                const data = await res.json();
+                if (res.ok && data.status === "SUCCESS") {
+                    alertBox.style.display = "block"; alertBox.style.background = "#F0FDF4"; alertBox.style.color = "#15803D"; alertBox.style.border = "1px solid #BBF7D0";
+                    alertBox.innerHTML = `✅ <strong>Roster Updated!</strong> Imported ${data.count} employees across departments.`;
+                    interviewerList = data.interviewers;
+                    renderWorkloadCards(interviewerList);
+                    if (shortlistedRecords.length > 0) renderTable(shortlistedRecords);
+                    toast("Roster imported", `${data.count} interviewers loaded.`);
+                } else {
+                    alertBox.style.display = "block"; alertBox.style.background = "#FEF2F2"; alertBox.style.color = "#B91C1C"; alertBox.style.border = "1px solid #FECACA";
+                    alertBox.innerHTML = `❌ <strong>Upload Failed:</strong> ${data.detail || "Could not parse Excel file."}`;
+                }
+            } catch (err) {
+                alertBox.style.display = "block"; alertBox.style.background = "#FEF2F2"; alertBox.style.color = "#B91C1C"; alertBox.style.border = "1px solid #FECACA";
+                alertBox.innerHTML = `❌ <strong>Upload Error:</strong> ${err.message}`;
+            } finally {
+                btn.disabled = false; btn.innerHTML = `📁 Upload Excel`; event.target.value = "";
+            }
+        }
+
+        async function clearRoster() {
+            if (!confirm("Clear the interviewer roster? The tracker will return to the initial empty state.")) return;
+            try {
+                const res = await fetch("/api/v1/interviews/clear-roster", { method: "POST" });
+                const data = await res.json();
+                if (res.ok) {
+                    interviewerList = [];
+                    renderWorkloadCards([]);
+                    if (shortlistedRecords.length > 0) renderTable(shortlistedRecords);
+                    const alertBox = document.getElementById("roster-upload-alert");
+                    alertBox.style.display = "block"; alertBox.style.background = "#EFF6FF"; alertBox.style.color = "#1D4ED8"; alertBox.style.border = "1px solid #BFDBFE";
+                    alertBox.innerHTML = `ℹ️ <strong>Roster Cleared.</strong> Upload an Excel file anytime to populate it.`;
+                    toast("Roster cleared", "Tracker reset to empty state.");
+                }
+            } catch (err) { toast("Error", err.message, true); }
+        }
+
+        /* ---------- Employee Referrals ---------- */
+        async function loadReferrals() {
+            try {
+                const res = await fetch("/api/v1/referrals");
+                const data = await res.json();
+                if (data.status === "SUCCESS") {
+                    referralsList = data.referrals || [];
+                    renderReferralsTable(referralsList);
+                }
+            } catch (err) { console.error("Error loading referrals:", err); }
+        }
+
+        function renderReferralsTable(list) {
+            const tbody = document.getElementById("referrals-table-body");
+            if (!tbody) return;
+            if (!list || list.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:24px;color:var(--gray);">
+                    No employee referrals registered. Upload an Excel referral sheet to auto-link candidates.
+                </td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = list.map(ref => {
+                let matchBadge = `<span style="background:#f1f5f9;color:#475569;border:1px solid #cbd5e1;padding:3px 8px;border-radius:10px;font-size:11px;font-weight:700;">⚪ Awaiting Application</span>`;
+                if (ref.matched_application) {
+                    const m = ref.matched_application;
+                    const isRej = (m.status || '').toUpperCase() === 'REJECTED';
+                    if (isRej) {
+                        matchBadge = `<span style="background:#fef2f2;color:#b91c1c;border:1px solid #fecaca;padding:3px 8px;border-radius:10px;font-size:11px;font-weight:700;">⚠️ Matched: AI Rejected (${m.weighted_score || 0}/100)</span>`;
+                    } else {
+                        matchBadge = `<span style="background:#f0fdf4;color:#15803d;border:1px solid #86efac;padding:3px 8px;border-radius:10px;font-size:11px;font-weight:700;">🟢 Matched: ${m.status || 'Active'}</span>`;
+                    }
+                }
+
+                return `
+                    <tr>
+                        <td>
+                            <strong style="color:#1e1b4b;font-size:13px;">${ref.candidate_name}</strong>
+                        </td>
+                        <td style="font-size:12.5px;color:#475569;">
+                            <div>${ref.candidate_email}</div>
+                            ${ref.candidate_phone ? `<div style="color:var(--gray);font-size:11px;">${ref.candidate_phone}</div>` : ""}
+                        </td>
+                        <td>
+                            <strong style="color:var(--purple);font-size:13px;">👤 ${ref.referred_by_name}</strong>
+                            <div style="font-size:11px;color:var(--gray);">${ref.referred_by_id || ''} &bull; ${ref.referred_by_email || ''}</div>
+                        </td>
+                        <td style="font-size:12.5px;color:#475569;font-weight:600;">${ref.department || 'Engineering'}</td>
+                        <td style="font-size:12px;color:#64748b;max-width:260px;line-height:1.35;">${ref.notes || 'Internal referral'}</td>
+                        <td>${matchBadge}</td>
+                    </tr>`;
+            }).join("");
+        }
+
+        async function handleReferralsUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const btn = document.getElementById("btn-upload-referrals");
+            const alertBox = document.getElementById("referrals-upload-alert");
+            btn.disabled = true; btn.innerHTML = `<span>⏳ Uploading...</span>`; alertBox.style.display = "none";
+            const formData = new FormData(); formData.append("file", file);
+            try {
+                const res = await fetch("/api/v1/referrals/upload-roster", { method: "POST", body: formData });
+                const data = await res.json();
+                if (res.ok && data.status === "SUCCESS") {
+                    alertBox.style.display = "block"; alertBox.style.background = "#F0FDF4"; alertBox.style.color = "#15803D"; alertBox.style.border = "1px solid #BBF7D0";
+                    alertBox.innerHTML = `✅ <strong>Referrals Imported!</strong> Loaded ${data.count} referrals (${data.matched_candidates_count || 0} matched to applications, ${data.rejected_referred_alerts || 0} flagged for HR review).`;
+                    await loadReferrals();
+                    await loadCandidates();
+                    toast("Referrals imported", `${data.count} employee referrals registered.`);
+                } else {
+                    alertBox.style.display = "block"; alertBox.style.background = "#FEF2F2"; alertBox.style.color = "#B91C1C"; alertBox.style.border = "1px solid #FECACA";
+                    alertBox.innerHTML = `❌ <strong>Upload Failed:</strong> ${data.detail || "Could not parse Excel file."}`;
+                }
+            } catch (err) {
+                alertBox.style.display = "block"; alertBox.style.background = "#FEF2F2"; alertBox.style.color = "#B91C1C"; alertBox.style.border = "1px solid #FECACA";
+                alertBox.innerHTML = `❌ <strong>Upload Error:</strong> ${err.message}`;
+            } finally {
+                btn.disabled = false; btn.innerHTML = `📁 Upload Referrals Excel`; event.target.value = "";
+            }
+        }
+
+        async function clearReferrals() {
+            if (!confirm("Clear all employee referrals?")) return;
+            try {
+                const res = await fetch("/api/v1/referrals", { method: "DELETE" });
+                const data = await res.json();
+                if (res.ok) {
+                    referralsList = [];
+                    renderReferralsTable([]);
+                    await loadCandidates();
+                    const alertBox = document.getElementById("referrals-upload-alert");
+                    alertBox.style.display = "block"; alertBox.style.background = "#EFF6FF"; alertBox.style.color = "#1D4ED8"; alertBox.style.border = "1px solid #BFDBFE";
+                    alertBox.innerHTML = `ℹ️ <strong>Referrals Cleared.</strong> Upload an Excel file anytime to populate referrals.`;
+                    toast("Referrals cleared", "Referrals registry reset.");
+                }
+            } catch (err) { toast("Error", err.message, true); }
+        }
+
+        function normalizeCandidateRole(roleStr) {
+            if (!roleStr) return "AI_ENGINEER";
+            const s = roleStr.toUpperCase();
+            if (s.includes("AI") || s.includes("ML") || s.includes("LEARNING") || s.includes("GENAI") || s.includes("DATA SCIEN")) return "AI_ENGINEER";
+            if (s.includes("DATA") || s.includes("ANALY") || s.includes("BI") || s.includes("TABLEAU") || s.includes("STAT")) return "DATA_ANALYST";
+            return "FULLSTACK_DEV";
+        }
+
+        function renderWorkloadCards(interviewers) {
+            const container = document.getElementById("workload-cards-container");
+            if (!interviewers || interviewers.length === 0) {
+                container.innerHTML = `
+                    <div style="grid-column:1/-1;text-align:center;background:#faf8fc;border:2px dashed #d8b4fe;border-radius:16px;padding:42px 24px;color:#475569;">
+                        <div style="font-size:38px;margin-bottom:8px;">📋</div>
+                        <div style="font-size:16px;font-weight:700;color:var(--purple);margin-bottom:6px;">No Technical Interviewers Uploaded Yet</div>
+                        <div style="font-size:13px;color:#64748b;max-width:520px;margin:0 auto 18px;line-height:1.5;">
+                            Upload your team's employee Excel sheet (.xlsx) with employee IDs, names, departments and designations to populate interviewer capacities.
+                        </div>
+                        <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;">
+                            <button onclick="document.getElementById('roster-file-input').click()" class="btn btn-primary btn-sm">📁 Upload Employee Excel</button>
+                            <a href="/api/v1/interviews/template/excel" download="GWC_Interviewer_Roster_Template.xlsx" class="btn btn-ghost btn-sm">📥 Download Sample Template</a>
+                        </div>
+                    </div>`;
+                return;
+            }
+            const maxLoad = Math.max(1, ...interviewers.map(e => e.total_assigned || 0));
+            container.innerHTML = interviewers.map(emp => {
+                const isAvail = (emp.total_assigned || 0) === 0;
+                const badge = isAvail ? `<span class="workload-badge-avail">🟢 Available</span>` : `<span class="workload-badge-busy">${emp.total_assigned} Assigned</span>`;
+                let domainTag = "🤖 AI Engineer";
+                if (emp.domain === "FULLSTACK_DEV") domainTag = "🌐 Full Stack";
+                if (emp.domain === "DATA_ANALYST") domainTag = "📊 Data Analyst";
+                const pct = Math.round((emp.total_assigned || 0) / maxLoad * 100);
+                return `
+                    <div class="workload-card">
+                        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
+                            <span style="font-size:11px;font-weight:700;color:var(--purple);background:#faf5ff;padding:2px 8px;border-radius:6px;border:1px solid #e9d5ff;">${domainTag}</span>
+                            ${badge}
+                        </div>
+                        <div class="workload-emp-name">${emp.employee_name}</div>
+                        <div class="workload-emp-role">${emp.role}</div>
+                        <div class="meter"><span style="width:${pct}%"></span></div>
+                        <div>
+                            <div class="workload-stat-row"><span style="color:var(--gray);font-weight:500;">Total Load:</span><strong style="color:var(--purple);">${emp.total_assigned} Candidates</strong></div>
+                            <div class="workload-stat-row"><span style="color:var(--gray);font-weight:500;">Meetings Fixed:</span><strong style="color:#16a34a;">${emp.meetings_fixed}</strong></div>
+                            <div class="workload-stat-row"><span style="color:var(--gray);font-weight:500;">Yet To Be Fixed:</span><strong style="color:var(--orange);">${emp.meetings_pending}</strong></div>
+                        </div>
+                    </div>`;
+            }).join("");
+        }
+
+        /* ---------- Candidates ---------- */
+        async function loadCandidates() {
+            try {
+                const res = await fetch("/api/v1/applications");
+                const data = await res.json();
+                if (data.status === "SUCCESS") {
+                    allCandidateRecords = data.candidates || [];
+                    totalCandidatesCount = allCandidateRecords.length;
+                    shortlistedRecords = allCandidateRecords;
+                    applyFilters();
+                    updateMetrics(allCandidateRecords);
+                    updateBatchStatusUI();
+                }
+            } catch (err) { console.error("Error loading candidates:", err); }
+        }
+
+        function candScore(c) { return Number(c.weightage_score || c.weighted_score || 0); }
+        function isFixed(c) { return (c.interview_status || "").toUpperCase() === "MEETING FIXED"; }
+        function isAssigned(c) { return !!(c.assigned_employee_email && c.assigned_employee_name); }
+
+        function updateMetrics(records) {
+            const total = records.length;
+            const shortlisted = records.filter(c => {
+                const st = (c.status || c.system_decision || "").toUpperCase();
+                const app = (c.hr_approval_status || "").toUpperCase();
+                return st === "SHORTLISTED" || app === "HR_APPROVED";
+            }).length;
+            const fixed = records.filter(isFixed).length;
+            const assigned = records.filter(isAssigned).length;
+            const pending = records.filter(c => (c.hr_approval_status || "").toUpperCase() === "PENDING_HR_APPROVAL" || !(c.hr_approval_status)).length;
+            const avg = total ? Math.round(records.reduce((s, r) => s + candScore(r), 0) / total) : 0;
+
+            document.getElementById("metric-total").innerText = total;
+            document.getElementById("metric-shortlisted").innerText = shortlisted;
+            document.getElementById("metric-fixed").innerText = fixed;
+            document.getElementById("metric-pending").innerText = pending;
+            document.getElementById("metric-avg").innerHTML = avg + '<small>/100</small>';
+            document.getElementById("nav-cand-count").innerText = total;
+
+            const denom = Math.max(1, total);
+            const pct = n => Math.round(n / denom * 100);
+            document.getElementById("fn-total").innerText = total;
+            document.getElementById("fn-short").innerText = shortlisted;
+            document.getElementById("fn-assign").innerText = assigned;
+            document.getElementById("fn-sched").innerText = fixed;
+            document.getElementById("fn-pct-total").innerText = total ? "100%" : "—";
+            document.getElementById("fn-pct-short").innerText = pct(shortlisted) + "%";
+            document.getElementById("fn-pct-assign").innerText = pct(assigned) + "%";
+            document.getElementById("fn-pct-sched").innerText = pct(fixed) + "%";
+            document.getElementById("fn-bar-short").style.width = Math.max(6, pct(shortlisted)) + "%";
+            document.getElementById("fn-bar-assign").style.width = Math.max(4, pct(assigned)) + "%";
+            document.getElementById("fn-bar-sched").style.width = Math.max(4, pct(fixed)) + "%";
+
+            renderActivity(records);
+        }
+
+        function renderActivity(records) {
+            const feed = document.getElementById("activity-feed");
+            const items = [];
+            records.filter(isFixed).slice(0, 3).forEach(c => items.push({ ico: "ico-green", em: "✅", body: `<b>Meeting fixed</b> — ${c.candidate_name || 'Candidate'} with ${c.assigned_employee_name || 'interviewer'}`, t: c.interview_schedule || "Scheduled" }));
+            records.filter(c => isAssigned(c) && !isFixed(c)).slice(0, 3).forEach(c => items.push({ ico: "ico-purple", em: "📨", body: `<b>Availability requested</b> — ${c.candidate_name || 'Candidate'} → ${c.assigned_employee_name || 'interviewer'}`, t: "Awaiting reply" }));
+            records.filter(c => !isAssigned(c)).slice(0, 2).forEach(c => items.push({ ico: "ico-orange", em: "⚪", body: `<b>Awaiting assignment</b> — ${c.candidate_name || 'Candidate'} (${(c.job_role || '').replace(/_/g, ' ')})`, t: "Needs interviewer" }));
+            if (!items.length) { feed.innerHTML = `<div style="color:var(--gray);font-size:13px;padding:8px 0;">No activity yet. Run a screening drive to populate the pipeline.</div>`; return; }
+            feed.innerHTML = items.slice(0, 6).map(i => `<div class="act"><div class="act-dot ${i.ico}">${i.em}</div><div><div class="act-body">${i.body}</div><div class="act-time">${i.t}</div></div></div>`).join("");
+        }
+
+        function statusPill(c) {
+            if (isFixed(c)) return `<span class="pill pill-fixed">🟢 Meeting Fixed</span>`;
+            if (isAssigned(c)) return `<span class="pill pill-wait">🟡 Awaiting Reply</span>`;
+            return `<span class="pill pill-unassigned">⚪ Unassigned</span>`;
+        }
+
+        function aiDecisionBadge(c) {
+            const dec = (c.system_decision || c.decision || c.status || "").toUpperCase();
+            const sc = candScore(c);
+            if (dec === "SHORTLISTED" || dec === "SELECTED" || (sc >= 75 && dec !== "REJECTED")) {
+                return `<span class="pill" style="background:#ecfdf5;color:#047857;border:1.5px solid #86efac;font-weight:800;font-size:11.5px;">AI Selected</span>`;
+            } else if (dec === "REJECTED" || dec === "FAILED" || (sc < 60 && sc > 0)) {
+                return `<span class="pill" style="background:#fef2f2;color:#b91c1c;border:1.5px solid #fca5a5;font-weight:800;font-size:11.5px;">AI Rejected</span>`;
+            }
+            return `<span class="pill" style="background:#fffbeb;color:#b45309;border:1.5px solid #fde68a;font-weight:800;font-size:11.5px;">AI Review</span>`;
+        }
+
+        function hrApprovalPill(c) {
+            const st = (c.hr_approval_status || "").toUpperCase();
+            const sc = candScore(c);
+            if (st === "HR_APPROVED") {
+                if (sc >= 90) return `<span class="pill" style="background:#f0fdf4;color:#15803d;border:1.5px solid #86efac;font-weight:700;">🟢 Auto-Accepted (90%+)</span>`;
+                return `<span class="pill" style="background:#f0fdf4;color:#15803d;border:1px solid #86efac;font-weight:700;">✅ HR Approved</span>`;
+            }
+            if (st === "RE_EVALUATED") return `<span class="pill" style="background:#faf5ff;color:#7030b1;border:1px solid #d8b4fe;font-weight:700;">🔄 AI Re-Evaluated</span>`;
+            if (st === "REJECTED_BY_HR") return `<span class="pill" style="background:#fef2f2;color:#b91c1c;border:1px solid #fecaca;font-weight:700;">❌ Rejected by HR</span>`;
+            return `<span class="pill" style="background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;font-weight:700;">⏳ Pending HR Review</span>`;
+        }
+
+        function isApproved(c) {
+            const st = (c.hr_approval_status || "").toUpperCase();
+            return st === "HR_APPROVED";
+        }
+
+        function renderTable(records) {
+            const tbody = document.getElementById("candidate-table-body");
+            if (!records || records.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="9" style="text-align:center;padding:32px 20px;color:var(--gray);">
+                    <div style="font-size:24px;margin-bottom:6px;">🔍</div>
+                    <div style="font-weight:600;color:#475569;">No candidates match the selected filters.</div>
+                    <div style="font-size:12px;color:#94a3b8;margin-top:4px;">Try resetting the filters or clearing the search query.</div>
+                </td></tr>`;
+                updateBulkActionBar();
+                return;
+            }
+            tbody.innerHTML = records.map(c => {
+                const score = candScore(c);
+                const ats = c.ats_score !== undefined ? c.ats_score : score;
+                const atsColor = ats >= 80 ? '#16a34a' : (ats >= 60 ? '#d97706' : '#dc2626');
+                const atsBg = ats >= 80 ? '#f0fdf4' : (ats >= 60 ? '#fffbeb' : '#fef2f2');
+                const atsBorder = ats >= 80 ? '#86efac' : (ats >= 60 ? '#fde68a' : '#fecaca');
+                const atsBadge = `<div style="margin-top:4px;"><span class="badge" style="background:${atsBg};color:${atsColor};border:1px solid ${atsBorder};font-size:10px;font-weight:700;padding:2px 6px;letter-spacing:0.02em;">🎯 ${ats}% ATS Match</span></div>`;
+
+                const role = (c.job_role || "N/A").replace(/_/g, " ");
+                const intv = c.assigned_employee_name ? c.assigned_employee_name : `<span style="color:var(--gray)">—</span>`;
+                const app = isApproved(c);
+                const isChecked = selectedCandidateIds.has(c.candidate_id);
+
+                const actionsHtml = app
+                    ? `<button class="btn btn-ghost btn-sm" style="font-size:11px;padding:4px 8px;border-radius:6px;" onclick="event.stopPropagation(); openCandidateDrawer('${c.candidate_id}')">👤 Manage</button>`
+                    : `<div style="display:flex;gap:4px;justify-content:flex-end;">
+                         <button class="btn btn-primary btn-sm" style="font-size:11px;padding:4px 8px;background:#16a34a;border-color:#16a34a;border-radius:6px;" onclick="event.stopPropagation(); quickApproveCandidate('${c.candidate_id}')">✅ Approve</button>
+                         <button class="btn btn-ghost btn-sm" style="font-size:11px;padding:4px 8px;border-radius:6px;border-color:var(--purple);color:var(--purple);" onclick="event.stopPropagation(); openFeedbackModal('${c.candidate_id}')">💬 Feedback</button>
+                       </div>`;
+
+                const referralBadge = c.is_referred ?
+                    (c.referral_alert === "REFERRED_REJECTED" || (c.status || '').toUpperCase() === 'REJECTED' ?
+                        `<div style="margin-top:3px;"><span class="badge" style="background:#fef2f2;color:#b91c1c;border:1px solid #fecaca;font-size:10.5px;padding:2px 7px;">⚠️ Ref: ${c.referred_by_name} (AI Rejected)</span></div>` :
+                        `<div style="margin-top:3px;"><span class="badge" style="background:#faf5ff;color:#7e22ce;border:1px solid #d8b4fe;font-size:10.5px;padding:2px 7px;">🌟 Ref: ${c.referred_by_name}</span></div>`
+                    ) : "";
+
+                return `
+                    <tr class="cand-row" onclick="openCandidateDrawer('${c.candidate_id}')">
+                        <td style="text-align:center;" onclick="event.stopPropagation()">
+                            <input type="checkbox" class="cand-checkbox" value="${c.candidate_id}" onchange="onCandidateCheckChange(this, '${c.candidate_id}')" ${isChecked ? "checked" : ""} style="cursor:pointer;transform:scale(1.15);">
+                        </td>
+                        <td>
+                            <div class="cand-name">${c.candidate_name || 'Applicant'}</div>
+                            <div class="cand-id">${c.candidate_id}</div>
+                            ${referralBadge}
+                        </td>
+                        <td style="color:var(--purple);font-weight:600;">${role}</td>
+                        <td>${aiDecisionBadge(c)}</td>
+                        <td>
+                            <div class="score-wrap"><div class="score-bar"><span style="width:${Math.min(100, score)}%"></span></div><span class="score-num">${score}</span></div>
+                            ${atsBadge}
+                        </td>
+                        <td>${hrApprovalPill(c)}</td>
+                        <td>${intv}</td>
+                        <td>${statusPill(c)}</td>
+                        <td style="text-align:right;">${actionsHtml}</td>
+                    </tr>`;
+            }).join("");
+            updateBulkActionBar();
+        }
+
+        function applyFilters() {
+            const q = (document.getElementById("filter-search")?.value || "").toLowerCase().trim();
+            const role = document.getElementById("filter-role")?.value || "ALL";
+            const scoreRange = document.getElementById("filter-score")?.value || "ALL";
+            const aiDec = document.getElementById("filter-ai-decision")?.value || "ALL";
+            const approval = document.getElementById("filter-approval")?.value || "ALL";
+            const interview = document.getElementById("filter-interview")?.value || "ALL";
+            const sortBy = document.getElementById("filter-sort")?.value || "score-desc";
+
+            let filtered = allCandidateRecords.filter(c => {
+                // Keyword search across Name, Email, Candidate ID, Job Role, Interviewer, Reasoning, Referrer
+                if (q) {
+                    const combined = `${c.candidate_name || ''} ${c.email || ''} ${c.candidate_id || ''} ${c.job_role || ''} ${c.assigned_employee_name || ''} ${c.reasoning || ''} ${c.decision_reason || ''} ${c.referred_by_name || ''} ${c.referral_notes || ''}`.toLowerCase();
+                    if (!combined.includes(q)) return false;
+                }
+
+                // Job Role Filter
+                if (role !== "ALL") {
+                    const cRole = (c.job_role || "").toUpperCase();
+                    if (cRole !== role.toUpperCase()) return false;
+                }
+
+                // AI Score Filter
+                const sc = candScore(c);
+                if (scoreRange === "80+" && sc < 80) return false;
+                if (scoreRange === "60-79" && (sc < 60 || sc >= 80)) return false;
+                if (scoreRange === "<60" && sc >= 60) return false;
+
+                // AI Decision Filter (Selected vs Rejected vs Review)
+                if (aiDec !== "ALL") {
+                    const rawDec = (c.system_decision || c.decision || c.status || "").toUpperCase();
+                    if (aiDec === "SELECTED") {
+                        if (rawDec !== "SHORTLISTED" && rawDec !== "SELECTED" && sc < 75) return false;
+                    } else if (aiDec === "REJECTED") {
+                        if (rawDec !== "REJECTED" && rawDec !== "FAILED" && sc >= 60) return false;
+                    } else if (aiDec === "REVIEW") {
+                        if (rawDec === "SHORTLISTED" || rawDec === "REJECTED") return false;
+                    }
+                }
+
+                // HR Approval / Referral Filter
+                const apprStatus = (c.hr_approval_status || "").toUpperCase();
+                if (approval !== "ALL") {
+                    if (approval === "REFERRED_ONLY") {
+                        if (!c.is_referred) return false;
+                    } else if (approval === "REFERRED_REJECTED") {
+                        if (!c.is_referred || (c.referral_alert !== "REFERRED_REJECTED" && (c.status || '').toUpperCase() !== 'REJECTED')) return false;
+                    } else if (approval === "PENDING_HR_APPROVAL") {
+                        if (apprStatus !== "PENDING_HR_APPROVAL" && apprStatus !== "") return false;
+                    } else if (apprStatus !== approval) {
+                        return false;
+                    }
+                }
+
+                // Interview Status Filter
+                if (interview !== "ALL") {
+                    if (interview === "MEETING_FIXED" && !isFixed(c)) return false;
+                    if (interview === "AWAITING_REPLY" && (!isAssigned(c) || isFixed(c))) return false;
+                    if (interview === "UNASSIGNED" && isAssigned(c)) return false;
+                }
+
+                return true;
+            });
+
+            // Sorting
+            filtered.sort((a, b) => {
+                const scoreA = candScore(a);
+                const scoreB = candScore(b);
+                if (sortBy === "score-desc") return scoreB - scoreA;
+                if (sortBy === "score-asc") return scoreA - scoreB;
+                if (sortBy === "name-asc") return (a.candidate_name || '').localeCompare(b.candidate_name || '');
+                if (sortBy === "role-asc") return (a.job_role || '').localeCompare(b.job_role || '');
+                return 0;
+            });
+
+            displayedRecords = filtered;
+            shortlistedRecords = allCandidateRecords;
+            renderTable(displayedRecords);
+
+            const countLabel = document.getElementById("filter-match-count");
+            if (countLabel) {
+                countLabel.textContent = `Showing ${displayedRecords.length} of ${allCandidateRecords.length} candidate(s)`;
+            }
+        }
+
+        function resetAllFilters() {
+            if (document.getElementById("filter-search")) document.getElementById("filter-search").value = "";
+            if (document.getElementById("filter-role")) document.getElementById("filter-role").value = "ALL";
+            if (document.getElementById("filter-score")) document.getElementById("filter-score").value = "ALL";
+            if (document.getElementById("filter-ai-decision")) document.getElementById("filter-ai-decision").value = "ALL";
+            if (document.getElementById("filter-approval")) document.getElementById("filter-approval").value = "ALL";
+            if (document.getElementById("filter-interview")) document.getElementById("filter-interview").value = "ALL";
+            if (document.getElementById("filter-sort")) document.getElementById("filter-sort").value = "score-desc";
+            applyFilters();
+            toast("Filters Reset", "Showing all candidates across all columns.");
+        }
+
+
+        function toggleSelectAll(masterCheckbox) {
+            const isChecked = masterCheckbox.checked;
+            displayedRecords.forEach(c => {
+                if (isChecked) {
+                    selectedCandidateIds.add(c.candidate_id);
+                } else {
+                    selectedCandidateIds.delete(c.candidate_id);
+                }
+            });
+            document.querySelectorAll(".cand-checkbox").forEach(cb => cb.checked = isChecked);
+            updateBulkActionBar();
+        }
+
+        function onCandidateCheckChange(checkboxElem, candidateId) {
+            if (checkboxElem.checked) {
+                selectedCandidateIds.add(candidateId);
+            } else {
+                selectedCandidateIds.delete(candidateId);
+            }
+            const master = document.getElementById("select-all-candidates");
+            if (master && displayedRecords.length > 0) {
+                master.checked = displayedRecords.every(c => selectedCandidateIds.has(c.candidate_id));
+            }
+            updateBulkActionBar();
+        }
+
+        function updateBulkActionBar() {
+            const bar = document.getElementById("bulk-action-bar");
+            const countLabel = document.getElementById("bulk-selected-count");
+            const btnApprove = document.getElementById("btn-bulk-approve");
+            if (!bar) return;
+
+            const size = selectedCandidateIds.size;
+            if (size > 0) {
+                bar.style.display = "flex";
+                if (countLabel) countLabel.textContent = `${size} Candidate(s) Selected`;
+                if (btnApprove) btnApprove.textContent = `✅ Bulk Approve Selected (${size})`;
+            } else {
+                bar.style.display = "none";
+            }
+        }
+
+        function clearCandidateSelection() {
+            selectedCandidateIds.clear();
+            const master = document.getElementById("select-all-candidates");
+            if (master) master.checked = false;
+            document.querySelectorAll(".cand-checkbox").forEach(cb => cb.checked = false);
+            updateBulkActionBar();
+        }
+
+        async function executeBulkApprove(approveAllPending = false) {
+            const ids = approveAllPending ? null : Array.from(selectedCandidateIds);
+            if (!approveAllPending && ids.length === 0) {
+                toast("Select candidates", "Please check one or more candidates to approve in bulk.", true);
+                return;
+            }
+
+            const promptText = approveAllPending
+                ? "⚡ Approve ALL pending candidates across the recruitment drive in 1 click?"
+                : `✅ Approve ${ids.length} selected candidate(s) in bulk?`;
+
+            if (!confirm(promptText)) return;
+
+            toast("Bulk Approving…", `Approving candidate batch and sending consolidated HR digest.`);
+            try {
+                const res = await fetch("/api/v1/applications/bulk-hr-approve", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        candidate_ids: ids,
+                        approve_all_pending: approveAllPending
+                    })
+                });
+                const data = await res.json();
+                if (res.ok && data.status === "SUCCESS") {
+                    toast("Bulk Approved!", `Approved ${data.approved_count} candidate(s). Email digest sent to HR.`);
+                    clearCandidateSelection();
+                    await loadCandidates();
+                } else {
+                    toast("Bulk approval failed", data.detail || "Error", true);
+                }
+            } catch (err) {
+                toast("Error", err.message, true);
+            }
+        }
+
+        async function executeBulkReject() {
+            const ids = Array.from(selectedCandidateIds);
+            if (ids.length === 0) {
+                toast("Select candidates", "Please select one or more candidates to reject.", true);
+                return;
+            }
+
+            const reason = prompt(`Enter rejection reason for ${ids.length} selected candidate(s):`, "Does not match current criteria.");
+            if (reason === null) return;
+
+            toast("Bulk Rejecting…", `Marking ${ids.length} candidates as rejected.`);
+            try {
+                const res = await fetch("/api/v1/applications/bulk-hr-reject", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        candidate_ids: ids,
+                        reason: reason
+                    })
+                });
+                const data = await res.json();
+                if (res.ok && data.status === "SUCCESS") {
+                    toast("Bulk Rejected", `Marked ${data.rejected_count} candidate(s) as rejected.`);
+                    clearCandidateSelection();
+                    await loadCandidates();
+                } else {
+                    toast("Bulk rejection failed", data.detail || "Error", true);
+                }
+            } catch (err) {
+                toast("Error", err.message, true);
+            }
+        }
+
+        /* ---------- Drawer ---------- */
+        function buildInterviewerOptions(c, recommendations = null) {
+            const assigned = isAssigned(c);
+            const assignedEmail = c.assigned_employee_email || "";
+            const assignedId = c.assigned_employee_id || "";
+
+            if (!interviewerList || interviewerList.length === 0) {
+                return `<option value="" disabled selected>-- No Interviewers (Upload Excel First) --</option>`;
+            }
+
+            const def = !assigned ? `<option value="" disabled selected>-- Select Technical Interviewer --</option>` : "";
+
+            let list = [];
+            if (recommendations && recommendations.length > 0) {
+                list = recommendations;
+            } else {
+                const candDomain = normalizeCandidateRole(c.job_role);
+                const matching = interviewerList.filter(emp => emp.domain === candDomain);
+                const others = interviewerList.filter(emp => emp.domain !== candDomain);
+                list = [...matching, ...others];
+            }
+
+            return def + list.map(emp => {
+                const sel = assigned && (emp.employee_email === assignedEmail || emp.employee_id === assignedId) ? "selected" : "";
+                const score = emp.match_score ? `${Math.round(emp.match_score)}% Match` : (emp.domain === normalizeCandidateRole(c.job_role) ? "High Match" : "Alternative");
+                const icon = emp.is_top_match || emp.match_score >= 90 ? "⭐" : "👤";
+                return `<option value="${emp.employee_email}" data-id="${emp.employee_id}" data-name="${emp.employee_name}" ${sel}>${icon} ${score} • ${emp.employee_name} (${emp.role || emp.department} - ${emp.total_assigned || 0} assigned)</option>`;
+            }).join("");
+        }
+
+        async function loadInterviewerRecommendations(c) {
+            const container = document.getElementById("d-recommendation-cards");
+            if (!container) return;
+
+            container.innerHTML = `
+                <div style="background:#f8fafc;border:1px dashed #cbd5e1;border-radius:10px;padding:10px;text-align:center;font-size:12px;color:var(--gray);">
+                    <span>🤖 Computing AI Technical Skill Match &amp; Load Balancing...</span>
+                </div>`;
+
+            try {
+                const res = await fetch(`/api/v1/interviews/recommendations/${c.candidate_id}`);
+                const data = await res.json();
+                if (res.ok && data.status === "SUCCESS" && data.recommendations && data.recommendations.length > 0) {
+                    const recs = data.recommendations;
+                    // Update dropdown with live recommendation scores
+                    document.getElementById("drawer-select").innerHTML = buildInterviewerOptions(c, recs);
+
+                    // Render top recommendation cards
+                    const topRecs = recs.slice(0, 2);
+                    const app = isApproved(c);
+                    const isAssignedCand = isAssigned(c);
+
+                    container.innerHTML = topRecs.map((emp, idx) => {
+                        const isTop = idx === 0;
+                        const matchPct = Math.round(emp.match_score || 85);
+                        const bgGradient = isTop ? "linear-gradient(135deg,#faf5ff 0%,#f3e8ff 100%)" : "#ffffff";
+                        const borderColor = isTop ? "#d8b4fe" : "#e2e8f0";
+                        const badgeBg = matchPct >= 90 ? "#f0fdf4" : "#eff6ff";
+                        const badgeColor = matchPct >= 90 ? "#15803d" : "#1d4ed8";
+                        const badgeBorder = matchPct >= 90 ? "#86efac" : "#bfdbfe";
+                        const skillsTags = (emp.matched_skills || []).map(s => `<span style="background:rgba(112,48,177,0.08);color:var(--purple);font-size:10.5px;font-weight:600;padding:2px 7px;border-radius:4px;">${s}</span>`).join(" ");
+
+                        const isAlreadyAssigned = isAssignedCand && (c.assigned_employee_email === emp.employee_email || c.assigned_employee_id === emp.employee_id);
+
+                        return `
+                            <div style="background:${bgGradient};border:1.5px solid ${borderColor};border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;box-shadow:0 2px 6px rgba(0,0,0,0.03);">
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <div style="display:flex;align-items:center;gap:6px;">
+                                        <strong style="font-size:13px;color:#1e1b4b;">👤 ${emp.employee_name}</strong>
+                                        <span style="font-size:11px;color:var(--gray);">(${emp.role || emp.department})</span>
+                                    </div>
+                                    <span style="background:${badgeBg};color:${badgeColor};border:1px solid ${badgeBorder};font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:12px;">⭐ ${matchPct}% Match</span>
+                                </div>
+                                <div style="font-size:11.5px;color:#475569;line-height:1.35;">
+                                    ${emp.ai_reasoning || emp.recommendation_reason || "Specialized skill fit with available interview capacity."}
+                                </div>
+                                ${skillsTags ? `<div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:2px;">${skillsTags}</div>` : ""}
+                                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px;">
+                                    <span style="font-size:11px;font-weight:600;color:${emp.total_assigned === 0 ? '#16a34a' : 'var(--orange)'};">
+                                        ${emp.total_assigned === 0 ? '🟢 0 Assigned (Available)' : '🟡 ' + emp.total_assigned + ' Assigned'}
+                                    </span>
+                                    ${isAlreadyAssigned ? `
+                                        <span style="font-size:11px;font-weight:700;color:#15803d;background:#f0fdf4;padding:3px 8px;border-radius:6px;border:1px solid #86efac;">✅ Assigned</span>
+                                    ` : `
+                                        <button class="btn btn-sm btn-primary" onclick="quickAssignInterviewer('${emp.employee_id}', '${emp.employee_name}', '${emp.employee_email}')" ${!app ? 'disabled title="Approve candidate first"' : ''} style="padding:3px 10px;font-size:11px;font-weight:700;background:var(--grad-po);border:none;">
+                                            ⚡ Quick Assign
+                                        </button>
+                                    `}
+                                </div>
+                            </div>
+                        `;
+                    }).join("");
+                } else {
+                    container.innerHTML = `
+                        <div style="background:#faf8fc;border:1px solid #ede4f7;border-radius:8px;padding:8px 12px;font-size:11.5px;color:var(--purple);font-weight:500;">
+                            💡 Upload an interviewer roster in the Technical Interviewers tab to view AI skill match scores.
+                        </div>`;
+                }
+            } catch (err) {
+                console.warn("Could not load recommendations:", err);
+                container.innerHTML = "";
+            }
+        }
+
+        async function quickAssignInterviewer(empId, empName, empEmail) {
+            const selectElem = document.getElementById("drawer-select");
+            selectElem.value = empEmail;
+            for (let opt of selectElem.options) {
+                if (opt.value === empEmail || opt.getAttribute("data-id") === empId) {
+                    opt.selected = true;
+                    break;
+                }
+            }
+            await assignFromDrawer();
+        }
+
+        function openCandidateDrawer(candidateId) {
+            const c = allCandidateRecords.find(r => String(r.candidate_id) === String(candidateId)) || shortlistedRecords.find(r => String(r.candidate_id) === String(candidateId));
+            if (!c) return;
+            currentDrawerCandidateId = candidateId;
+            currentDrawerCandidate = c;
+            const app = isApproved(c);
+
+            document.getElementById("d-name").textContent = c.candidate_name || "Applicant";
+            document.getElementById("d-role").textContent = (c.job_role || "N/A").replace(/_/g, " ");
+            document.getElementById("d-id").textContent = c.candidate_id || "—";
+            document.getElementById("d-email").textContent = c.email || "N/A";
+            document.getElementById("d-phone").textContent = c.phone || "N/A";
+            document.getElementById("d-ai-decision").innerHTML = aiDecisionBadge(c);
+            document.getElementById("d-score").textContent = candScore(c) + "/100";
+
+            // Populate ATS details
+            const atsScore = c.ats_score !== undefined ? c.ats_score : candScore(c);
+            const atsScoreElem = document.getElementById("d-ats-score");
+            if (atsScoreElem) {
+                atsScoreElem.textContent = `${atsScore}% Match`;
+                atsScoreElem.style.color = atsScore >= 80 ? "#16a34a" : (atsScore >= 60 ? "#d97706" : "#dc2626");
+            }
+            const atsVerdictElem = document.getElementById("d-ats-verdict-badge");
+            if (atsVerdictElem) {
+                const label = c.ats_verdict_label || (atsScore >= 80 ? "High ATS Match" : (atsScore >= 60 ? "Moderate ATS Match" : "Low ATS Match"));
+                atsVerdictElem.textContent = label;
+                atsVerdictElem.style.background = atsScore >= 80 ? "#f0fdf4" : (atsScore >= 60 ? "#fffbeb" : "#fef2f2");
+                atsVerdictElem.style.color = atsScore >= 80 ? "#16a34a" : (atsScore >= 60 ? "#b45309" : "#b91c1c");
+                atsVerdictElem.style.borderColor = atsScore >= 80 ? "#86efac" : (atsScore >= 60 ? "#fde68a" : "#fecaca");
+            }
+            const atsSummElem = document.getElementById("d-ats-summary-text");
+            if (atsSummElem) {
+                atsSummElem.textContent = c.ats_summary || `Evaluated against Job Description technical requirements and experience expectations. Overall ATS alignment: ${atsScore}%.`;
+            }
+            const matchedElem = document.getElementById("d-ats-matched-kws");
+            if (matchedElem) {
+                const matched = Array.isArray(c.matched_keywords) ? c.matched_keywords : [];
+                if (matched.length > 0) {
+                    matchedElem.innerHTML = matched.map(kw => `<span style="background:#f0fdf4;color:#15803d;border:1px solid #86efac;font-size:11px;font-weight:600;padding:2px 7px;border-radius:6px;">✓ ${kw}</span>`).join(" ");
+                } else {
+                    matchedElem.innerHTML = `<span style="color:#94a3b8;font-size:11px;">No direct JD keywords matched</span>`;
+                }
+            }
+            const missingElem = document.getElementById("d-ats-missing-kws");
+            if (missingElem) {
+                const missing = Array.isArray(c.missing_keywords) ? c.missing_keywords : [];
+                if (missing.length > 0) {
+                    missingElem.innerHTML = missing.map(kw => `<span style="background:#fef2f2;color:#b91c1c;border:1px solid #fecaca;font-size:11px;font-weight:600;padding:2px 7px;border-radius:6px;">✗ ${kw}</span>`).join(" ");
+                } else {
+                    missingElem.innerHTML = `<span style="color:#16a34a;font-size:11px;">None (All target skills present)</span>`;
+                }
+            }
+
+            document.getElementById("d-approval-pill").innerHTML = hrApprovalPill(c);
+            document.getElementById("d-hitl-badge").innerHTML = hrApprovalPill(c);
+            document.getElementById("d-status").innerHTML = statusPill(c);
+            document.getElementById("d-reason").textContent = c.reasoning || c.decision_reason || "Screening assessment based on core skills and job requirements.";
+
+            document.getElementById("drawer-select").innerHTML = buildInterviewerOptions(c);
+
+            // Populate Employee Referral Box
+            const refBox = document.getElementById("d-referral-box");
+            if (refBox) {
+                if (c.is_referred) {
+                    refBox.style.display = "block";
+                    document.getElementById("d-referral-referrer").innerHTML = `👤 Referred by: <strong>${c.referred_by_name}</strong> (${c.referred_by_id || 'Employee'}) &bull; <span style="color:var(--gray);font-weight:400;">${c.referred_by_email || ''}</span>`;
+                    document.getElementById("d-referral-notes").textContent = c.referral_notes || "Internal employee recommendation.";
+
+                    const refAlert = document.getElementById("d-referral-alert-msg");
+                    if (c.referral_alert === "REFERRED_REJECTED" || (c.status || '').toUpperCase() === 'REJECTED') {
+                        refAlert.style.display = "block";
+                        refAlert.innerHTML = `⚠️ <strong>AI Screening Decision: REJECTED</strong> (Score: ${candScore(c)}/100). Candidate was referred by an employee — you may use <em>Feedback &amp; Re-Eval</em> or <em>Approve for Interview</em> below to review.`;
+                    } else {
+                        refAlert.style.display = "none";
+                    }
+                } else {
+                    refBox.style.display = "none";
+                }
+            }
+
+            // Fetch dynamic AI recommendation scores & render recommendation cards
+            loadInterviewerRecommendations(c);
+
+            const fbNote = document.getElementById("d-hitl-feedback-note");
+            if (c.hr_feedback) {
+                fbNote.style.display = "block";
+                fbNote.innerHTML = `💬 <strong>Applied HR Guidance:</strong> "${c.hr_feedback}"`;
+            } else {
+                fbNote.style.display = "none";
+            }
+
+            const assignGate = document.getElementById("d-assign-gate-note");
+            const btnApprove = document.getElementById("btn-drawer-approve");
+            const assignSel = document.getElementById("drawer-select");
+            const btnAssign = document.getElementById("btn-drawer-assign");
+
+            if (app) {
+                assignGate.style.display = "none";
+                assignSel.disabled = false;
+                btnAssign.disabled = false;
+                btnApprove.style.display = "none";
+            } else {
+                assignGate.style.display = "block";
+                assignSel.disabled = true;
+                btnAssign.disabled = true;
+                btnApprove.style.display = "inline-flex";
+            }
+
+            const teams = document.getElementById("d-teams");
+            if (isFixed(c) && c.teams_meeting_url) {
+                teams.style.display = "block";
+                teams.innerHTML = `<a href="${c.teams_meeting_url}" target="_blank" class="teams-link-btn">🔗 Join Teams Meeting</a><div style="font-size:11px;color:var(--gray);margin-top:4px;">${c.interview_schedule || 'Schedule confirmed'}</div>`;
+            } else {
+                teams.style.display = "none";
+                teams.innerHTML = "";
+            }
+
+            const profileTab = document.querySelector('.dtab[data-tab="profile"]');
+            if (profileTab) dtab(profileTab);
+
+            kitLoadedFor = null;
+            document.getElementById("drawer").classList.add("open");
+            document.getElementById("drawer").setAttribute("aria-hidden", "false");
+            document.getElementById("drawer-ov").classList.add("open");
+        }
+
+        function closeDrawer() {
+            document.getElementById("drawer").classList.remove("open");
+            document.getElementById("drawer").setAttribute("aria-hidden", "true");
+            document.getElementById("drawer-ov").classList.remove("open");
+            currentDrawerCandidateId = null;
+            currentDrawerCandidate = null;
+        }
+
+        async function quickApproveCandidate(candidateId) {
+            toast("Approving…", `Approving candidate for technical interview.`);
+            try {
+                const res = await fetch(`/api/v1/applications/${candidateId}/hr-approve`, { method: "POST" });
+                const data = await res.json();
+                if (res.ok && data.status === "SUCCESS") {
+                    toast("Candidate Approved", "Shortlist confirmation email sent to HR.");
+                    await loadCandidates();
+                    if (currentDrawerCandidateId === candidateId) openCandidateDrawer(candidateId);
+                } else {
+                    toast("Approval failed", data.detail || "Error", true);
+                }
+            } catch (err) { toast("Error", err.message, true); }
+        }
+
+        async function approveCurrentDrawerCandidate() {
+            if (!currentDrawerCandidateId) return;
+            await quickApproveCandidate(currentDrawerCandidateId);
+        }
+
+        async function rejectCurrentDrawerCandidate() {
+            if (!currentDrawerCandidateId) return;
+            const reason = prompt("Enter optional rejection notes for HR records:", "Does not meet current technical seniority requirements.");
+            if (reason === null) return;
+            toast("Rejecting…", "Recording HR rejection.");
+            try {
+                const res = await fetch(`/api/v1/applications/${currentDrawerCandidateId}/hr-reject`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ reason: reason })
+                });
+                const data = await res.json();
+                if (res.ok && data.status === "SUCCESS") {
+                    toast("Candidate Rejected", "Candidate marked as rejected by HR.");
+                    await loadCandidates();
+                    closeDrawer();
+                } else {
+                    toast("Rejection failed", data.detail || "Error", true);
+                }
+            } catch (err) { toast("Error", err.message, true); }
+        }
+
+        function openFeedbackModal(candidateId) {
+            const c = allCandidateRecords.find(r => String(r.candidate_id) === String(candidateId)) || shortlistedRecords.find(r => String(r.candidate_id) === String(candidateId));
+            if (!c) return;
+            feedbackTargetCandidateId = candidateId;
+            lastReEvalResult = null;
+
+            document.getElementById("fb-modal-name").textContent = c.candidate_name || "Applicant";
+            document.getElementById("fb-modal-score").textContent = `Current Score: ${candScore(c)}/100`;
+            document.getElementById("fb-modal-prev-reason").textContent = c.reasoning || c.decision_reason || "Selected based on qualifying core skills.";
+            document.getElementById("hr-feedback-text").value = c.hr_feedback || "";
+            document.getElementById("re-eval-result-box").style.display = "none";
+            document.getElementById("feedback-modal").style.display = "flex";
+        }
+
+        function closeFeedbackModal() {
+            document.getElementById("feedback-modal").style.display = "none";
+            feedbackTargetCandidateId = null;
+        }
+
+        function setFeedbackTemplate(text) {
+            document.getElementById("hr-feedback-text").value = text;
+        }
+
+        async function submitFeedbackReEvaluation() {
+            if (!feedbackTargetCandidateId) return;
+            const feedbackText = document.getElementById("hr-feedback-text").value.trim();
+            if (!feedbackText) {
+                toast("Enter feedback", "Please type your evaluation feedback or select a template.", true);
+                return;
+            }
+
+            const btn = document.getElementById("btn-run-re-eval");
+            btn.disabled = true;
+            btn.innerHTML = `<span>⏳ Re-Evaluating with Gemini...</span>`;
+
+            try {
+                const res = await fetch(`/api/v1/applications/${feedbackTargetCandidateId}/hr-re-evaluate`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ hr_feedback: feedbackText })
+                });
+                const data = await res.json();
+                if (res.ok && data.status === "SUCCESS") {
+                    lastReEvalResult = data.re_evaluation;
+                    document.getElementById("re-eval-new-score").textContent = `Revised Score: ${lastReEvalResult.revised_score}/100`;
+                    document.getElementById("re-eval-new-reason").textContent = lastReEvalResult.revised_reasoning;
+                    document.getElementById("re-eval-result-box").style.display = "block";
+                    toast("Re-evaluation complete", `AI updated candidate assessment with your guidance.`);
+                    await loadCandidates();
+                } else {
+                    toast("Re-evaluation failed", data.detail || "Error", true);
+                }
+            } catch (err) {
+                toast("Error", err.message, true);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = `🚀 Run AI Re-Evaluation (Gemini)`;
+            }
+        }
+
+        async function approveWithRevisedScore() {
+            if (!feedbackTargetCandidateId) return;
+            await quickApproveCandidate(feedbackTargetCandidateId);
+            closeFeedbackModal();
+        }
+
+        function dtab(el) {
+            const t = el.getAttribute("data-tab");
+            document.querySelectorAll(".dtab").forEach(x => x.classList.toggle("active", x === el));
+            document.querySelectorAll(".dpanel").forEach(p => p.classList.toggle("active", p.id === "panel-" + t));
+            if (t === "kit" && currentDrawerCandidateId && kitLoadedFor !== currentDrawerCandidateId) {
+                loadQuestionKit(currentDrawerCandidateId);
+            }
+        }
+
+        async function assignFromDrawer() {
+            const c = currentDrawerCandidate;
+            if (!c) return;
+            const selectElem = document.getElementById("drawer-select");
+            const selectedOpt = selectElem.options[selectElem.selectedIndex];
+            const empEmail = selectElem.value;
+            if (!empEmail) { toast("Select an interviewer", "Choose one from the dropdown before assigning.", true); return; }
+            const empId = selectedOpt.getAttribute("data-id") || "EMP-101";
+            const empName = selectedOpt.getAttribute("data-name") || "Interviewer";
+            toast("Assigning…", `Dispatching availability email to ${empName}.`);
+            try {
+                const res = await fetch("/api/v1/interviews/assign-and-request-availability", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ candidate_id: c.candidate_id, employee_id: empId, employee_name: empName, employee_email: empEmail })
+                });
+                const data = await res.json();
+                if (res.ok && data.status === "SUCCESS") {
+                    toast("Assigned!", `Availability request emailed to ${empName}.`);
+                    await loadWorkloads();
+                    await loadCandidates();
+                    closeDrawer();
+                } else {
+                    toast("Assignment failed", data.detail || "Error", true);
+                }
+            } catch (err) { toast("Error", err.message, true); }
+        }
+
+        /* ---------- AI Question Kit (in drawer) ---------- */
+        async function loadQuestionKit(candidateId) {
+            const body = document.getElementById("kit-body");
+            body.innerHTML = `<div style="text-align:center;padding:40px;color:var(--purple);"><div class="spinner" style="margin:0 auto 16px;"></div><strong>🤖 Analyzing resume & generating question kit...</strong></div>`;
+            try {
+                const res = await fetch(`/api/v1/interviews/question-kit/${candidateId}`);
+                const data = await res.json();
+                if (data.status !== "SUCCESS") { body.innerHTML = `<div style="color:#dc2626;padding:20px;">❌ Failed to generate: ${data.detail || "Error"}</div>`; return; }
+                const kit = data.question_kit;
+                const deepDives = (kit.project_deep_dives || []).map((q, i) => `
+                    <div class="q-block"><div class="q">❓ Q${i + 1}: ${q.question}</div>
+                        <div class="look">🎯 Look for: <span>${q.what_to_look_for || ''}</span></div>
+                        <div class="follow">⚡ Follow-up: <span>${q.follow_up || ''}</span></div></div>`).join("");
+                const coreTech = (kit.core_technical_questions || []).map(q => `
+                    <div class="core-block"><div class="topic">🔹 ${q.topic || ''}</div>
+                        <div style="color:#1e293b;font-size:13.5px;font-weight:600;">${q.question || ''}</div>
+                        <ul>${(q.ideal_answer_points || []).map(pt => `<li>${pt}</li>`).join("")}</ul></div>`).join("");
+                const sys = kit.system_design_challenge || {};
+                const redFlags = (kit.verification_red_flags || []).map(rf => `<li>⚠️ ${rf}</li>`).join("");
+                body.innerHTML = `
+                    <div class="reason-box" style="margin-bottom:16px;">${kit.executive_summary || ''}</div>
+                    <div class="dh4" style="color:var(--purple);">🎯 1. Resume Project Deep-Dives</div>${deepDives || '<div style="color:var(--gray);font-size:13px;">None generated.</div>'}
+                    <div class="dh4" style="color:#1d4ed8;">💻 2. Core Framework & Technical Probing</div>${coreTech || '<div style="color:var(--gray);font-size:13px;">None generated.</div>'}
+                    <div class="dh4" style="color:#ea580c;">🏗️ 3. Domain System Design Scenario</div>
+                    <div class="sys-block"><div style="font-weight:600;color:#9a3412;font-size:13.5px;margin-bottom:6px;">${sys.scenario || ''}</div>
+                        <div style="font-weight:700;color:#c2410c;font-size:12px;text-transform:uppercase;">Key Criteria:</div>
+                        <ul>${(sys.key_criteria || []).map(k => `<li>${k}</li>`).join("")}</ul></div>
+                    <div class="dh4" style="color:#b91c1c;">🚨 4. Verification Checkpoints & Red Flags</div>
+                    <div class="rf-block"><ul>${redFlags || '<li>None flagged.</li>'}</ul></div>`;
+                kitLoadedFor = candidateId;
+            } catch (err) { body.innerHTML = `<div style="color:#dc2626;padding:20px;">❌ Error: ${err.message}</div>`; }
+        }
+
+        function downloadQuestionsDocx() {
+            if (!currentDrawerCandidateId) { toast("Open a candidate first", "", true); return; }
+            window.location.href = `/api/v1/interviews/download-questions-docx/${currentDrawerCandidateId}`;
+        }
+
+        async function emailQuestionsDocx() {
+            if (!currentDrawerCandidateId) { toast("Open a candidate first", "", true); return; }
+            const btn = document.getElementById("btn-email-docx");
+            btn.disabled = true; btn.innerText = "⏳ Sending .docx...";
+            try {
+                const res = await fetch("/api/v1/interviews/send-questions-docx", {
+                    method: "POST", headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ candidate_id: currentDrawerCandidateId })
+                });
+                const data = await res.json();
+                if (res.ok && data.status === "SUCCESS") toast("Emailed!", "Question kit (.docx) sent to interviewer.");
+                else toast("Failed to send", data.detail || "Error", true);
+            } catch (err) { toast("Error", err.message, true); }
+            finally { btn.disabled = false; btn.innerText = "📎 Email Kit to Interviewer"; }
+        }
+
+        /* ---------- Screening drive ---------- */
+        async function triggerBatchDrive(e) {
+            e.preventDefault();
+            const btn = document.getElementById("btn-trigger");
+            const alertBox = document.getElementById("alert-box");
+            btn.disabled = true; btn.innerHTML = `<span>⏳ Processing Candidates...</span>`; alertBox.style.display = "none";
+            const payload = {
+                spreadsheet_url: document.getElementById("spreadsheet_url").value,
+                drive_folder_url: document.getElementById("drive_folder_url").value,
+                hr_email: document.getElementById("hr_email").value
+            };
+            try {
+                const res = await fetch("/api/v1/applications/trigger-batch", {
+                    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                if (res.ok && data.status === "SUCCESS") {
+                    alertBox.className = "alert-success";
+                    alertBox.innerText = `✅ Batch complete! Evaluated ${data.metrics.total} candidates (${data.metrics.shortlisted} shortlisted). Ready for Human-in-the-Loop review.`;
+                    alertBox.style.display = "block";
+                    allCandidateRecords = data.candidates || [];
+                    totalCandidatesCount = allCandidateRecords.length;
+                    shortlistedRecords = allCandidateRecords;
+                    applyFilters();
+                    updateMetrics(allCandidateRecords);
+                    await loadWorkloads();
+                    toast("Screening complete", `${data.metrics.shortlisted} shortlisted of ${data.metrics.total}.`);
+                } else {
+                    alertBox.className = "alert-error"; alertBox.innerText = `❌ Error: ${data.detail || "Batch drive failed."}`; alertBox.style.display = "block";
+                }
+            } catch (err) {
+                alertBox.className = "alert-error"; alertBox.innerText = `❌ Error: ${err.message}`; alertBox.style.display = "block";
+            } finally {
+                btn.disabled = false; btn.innerHTML = `<span>⚡ Run Resume Screening Drive</span>`;
+            }
+        }
+
+        async function downloadExcel() {
+            try {
+                const res = await fetch("/api/v1/applications/export/excel");
+                if (!res.ok) throw new Error(`Server error: ${res.status}`);
+                const blob = await res.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.style.display = "none"; a.href = url; a.download = "Candidate_Screening_Decisions_Reasoning.xlsx";
+                document.body.appendChild(a); a.click();
+                setTimeout(() => { document.body.removeChild(a); window.URL.revokeObjectURL(url); }, 200);
+            } catch (err) {
+                console.error("Direct blob download error:", err);
+                window.location.href = "/api/v1/applications/export/excel";
+            }
+        }
+
+        async function sendDigestEmail() {
+            const btn = document.getElementById("btn-digest");
+            btn.disabled = true; btn.innerHTML = "⏳ Sending...";
+            try {
+                const hrEmail = (document.getElementById("hr_email") || {}).value || "";
+                const res = await fetch("/api/v1/notifications/email-digest", {
+                    method: "POST", headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(hrEmail ? { hr_email: hrEmail } : {})
+                });
+                const data = await res.json().catch(() => ({}));
+                if (res.ok) toast("Digest sent", data.message || "Executive summary emailed to HR.");
+                else toast("Digest failed", data.detail || "Error", true);
+            } catch (err) { toast("Error", err.message, true); }
+            finally { btn.disabled = false; btn.innerHTML = "📩 Send HR Digest"; }
+        }
+
+        async function updateBatchStatusUI() {
+            try {
+                const res = await fetch("/api/v1/applications/batch-status");
+                const data = await res.json();
+                if (data.status === "SUCCESS") {
+                    const iconEl = document.getElementById("batch-status-icon");
+                    const titleEl = document.getElementById("batch-status-title");
+                    const subEl = document.getElementById("batch-status-subtitle");
+                    const bannerBtn = document.getElementById("btn-banner-finalize");
+                    const topBtn = document.getElementById("btn-finalize-batch");
+                    const banner = document.getElementById("batch-workflow-banner");
+
+                    if (data.is_finalized) {
+                        if (iconEl) { iconEl.textContent = "✅"; iconEl.style.background = "#dcfce7"; iconEl.style.color = "#16a34a"; }
+                        if (titleEl) titleEl.textContent = `Recruitment Batch Finalized (${data.finalized_at || "Dispatched"})`;
+                        if (subEl) subEl.innerHTML = `Official CSV cooked with <b>${data.total_candidates} candidates</b>, resumes organized in Drive, interview requests dispatched to interviewers, and HR Ultimate Digest sent.`;
+                        if (bannerBtn) bannerBtn.innerHTML = `🔄 Re-Finalize Batch`;
+                        if (topBtn) topBtn.innerHTML = `✅ Batch Finalized`;
+                        if (banner) banner.style.borderColor = "#86efac";
+                    } else {
+                        if (iconEl) { iconEl.textContent = "⏳"; iconEl.style.background = "#fef3c7"; iconEl.style.color = "#d97706"; }
+                        if (titleEl) titleEl.textContent = `Active Candidate Review Stage (${data.total_candidates} Candidates)`;
+                        if (subEl) subEl.innerHTML = `Review AI scores, override approvals, and assign interviewers. Once ready, click <b>Finalize &amp; Dispatch</b> to cook the CSV, organize Drive folders, and send emails.`;
+                        if (bannerBtn) bannerBtn.innerHTML = `⚡ Finalize &amp; Dispatch`;
+                        if (topBtn) topBtn.innerHTML = `⚡ Finalize &amp; Dispatch Batch`;
+                        if (banner) banner.style.borderColor = "#e2e8f0";
+                    }
+                }
+            } catch (err) {
+                console.error("Could not fetch batch status:", err);
+            }
+        }
+
+        function openFinalizeModal() {
+            const records = allCandidateRecords || [];
+            const shortlisted = records.filter(c => {
+                const st = (c.status || c.system_decision || "").toUpperCase();
+                const app = (c.hr_approval_status || "").toUpperCase();
+                return st === "SHORTLISTED" || app === "HR_APPROVED";
+            }).length;
+            const rejected = records.length - shortlisted;
+            const assigned = records.filter(c => c.assigned_employee_email && c.assigned_employee_email.trim()).length;
+
+            const finShort = document.getElementById("fin-count-shortlisted");
+            const finRej = document.getElementById("fin-count-rejected");
+            const finAss = document.getElementById("fin-count-assigned");
+
+            if (finShort) finShort.textContent = shortlisted;
+            if (finRej) finRej.textContent = rejected;
+            if (finAss) finAss.textContent = assigned;
+
+            const modal = document.getElementById("finalize-modal");
+            if (modal) modal.style.display = "flex";
+        }
+
+        function closeFinalizeModal() {
+            const modal = document.getElementById("finalize-modal");
+            if (modal) modal.style.display = "none";
+        }
+
+        async function executeFinalizeBatch() {
+            const btn = document.getElementById("btn-execute-finalize");
+            if (btn) {
+                btn.disabled = true;
+                btn.innerHTML = `⏳ Finalizing &amp; Dispatching...`;
+            }
+
+            try {
+                const hrEmail = (document.getElementById("hr_email") || {}).value || "";
+                const res = await fetch("/api/v1/applications/finalize-batch", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(hrEmail ? { hr_email: hrEmail } : {})
+                });
+                const data = await res.json();
+
+                if (res.ok && data.status === "SUCCESS") {
+                    closeFinalizeModal();
+                    toast("Batch Finalized!", data.message || "CSV cooked, Drive files moved, and emails sent!");
+                    await loadCandidates();
+                    await updateBatchStatusUI();
+                } else {
+                    toast("Finalize Failed", data.detail || "Could not finalize batch", true);
+                }
+            } catch (err) {
+                toast("Error", err.message, true);
+            } finally {
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerHTML = `🚀 Finalize &amp; Dispatch Now`;
+                }
+            }
+        }
+
+        /* ---------- Job Description & ATS Keywords Configuration Modal ---------- */
+        let activeJDRole = "AI_ENGINEER";
+        let allRoleJDs = {};
+
+        async function openJDModal() {
+            document.getElementById("jd-modal").style.display = "flex";
+            await loadJDModalData();
+        }
+
+        function closeJDModal() {
+            document.getElementById("jd-modal").style.display = "none";
+            const alertBox = document.getElementById("jd-alert-box");
+            if (alertBox) alertBox.style.display = "none";
+        }
+
+        async function loadJDModalData() {
+            try {
+                const res = await fetch("/api/v1/applications/jd/all");
+                const data = await res.json();
+                if (data.status === "SUCCESS" && data.roles) {
+                    allRoleJDs = data.roles;
+                    populateJDForm(activeJDRole);
+                }
+            } catch (err) {
+                console.error("Failed to load JDs:", err);
+                toast("Error", "Could not load Job Descriptions", true);
+            }
+        }
+
+        function switchJDRoleTab(roleCode) {
+            activeJDRole = roleCode;
+            document.getElementById("jd-tab-ai").className = roleCode === "AI_ENGINEER" ? "btn btn-sm jd-role-tab active" : "btn btn-sm jd-role-tab";
+            document.getElementById("jd-tab-ai").style.background = roleCode === "AI_ENGINEER" ? "#7030b1" : "#e2e8f0";
+            document.getElementById("jd-tab-ai").style.color = roleCode === "AI_ENGINEER" ? "#fff" : "#475569";
+
+            document.getElementById("jd-tab-fs").className = roleCode === "FULLSTACK_DEV" ? "btn btn-sm jd-role-tab active" : "btn btn-sm jd-role-tab";
+            document.getElementById("jd-tab-fs").style.background = roleCode === "FULLSTACK_DEV" ? "#7030b1" : "#e2e8f0";
+            document.getElementById("jd-tab-fs").style.color = roleCode === "FULLSTACK_DEV" ? "#fff" : "#475569";
+
+            document.getElementById("jd-tab-da").className = roleCode === "DATA_ANALYST" ? "btn btn-sm jd-role-tab active" : "btn btn-sm jd-role-tab";
+            document.getElementById("jd-tab-da").style.background = roleCode === "DATA_ANALYST" ? "#7030b1" : "#e2e8f0";
+            document.getElementById("jd-tab-da").style.color = roleCode === "DATA_ANALYST" ? "#fff" : "#475569";
+
+            populateJDForm(roleCode);
+        }
+
+        function populateJDForm(roleCode) {
+            const roleData = allRoleJDs[roleCode] || {};
+            const atsKws = roleData.ats_keywords || {};
+
+            document.getElementById("jd-input-title").value = roleData.title || roleCode;
+            document.getElementById("jd-input-desc").value = roleData.job_description || "";
+            document.getElementById("jd-input-resp").value = (roleData.core_responsibilities || []).join("\n");
+            document.getElementById("jd-input-kws-mand").value = (atsKws.mandatory_keywords || []).join(", ");
+            document.getElementById("jd-input-kws-pref").value = (atsKws.preferred_keywords || []).join(", ");
+            document.getElementById("jd-input-kws-good").value = (atsKws.good_to_have_keywords || []).join(", ");
+        }
+
+        async function saveActiveRoleJD() {
+            const btn = document.getElementById("btn-save-jd");
+            const alertBox = document.getElementById("jd-alert-box");
+            if (btn) {
+                btn.disabled = true;
+                btn.innerHTML = `⏳ Saving...`;
+            }
+
+            const title = document.getElementById("jd-input-title").value.trim();
+            const desc = document.getElementById("jd-input-desc").value.trim();
+            const respRaw = document.getElementById("jd-input-resp").value.trim();
+            const mandRaw = document.getElementById("jd-input-kws-mand").value.trim();
+            const prefRaw = document.getElementById("jd-input-kws-pref").value.trim();
+            const goodRaw = document.getElementById("jd-input-kws-good").value.trim();
+
+            const responsibilities = respRaw ? respRaw.split("\n").map(s => s.trim()).filter(Boolean) : [];
+            const mandatoryKws = mandRaw ? mandRaw.split(",").map(s => s.trim()).filter(Boolean) : [];
+            const preferredKws = prefRaw ? prefRaw.split(",").map(s => s.trim()).filter(Boolean) : [];
+            const goodKws = goodRaw ? goodRaw.split(",").map(s => s.trim()).filter(Boolean) : [];
+
+            const payload = {
+                title: title,
+                job_description: desc,
+                core_responsibilities: responsibilities,
+                ats_keywords: {
+                    mandatory_keywords: mandatoryKws,
+                    preferred_keywords: preferredKws,
+                    good_to_have_keywords: goodKws
+                }
+            };
+
+            try {
+                const res = await fetch(`/api/v1/applications/jd/${activeJDRole}`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                if (res.ok && data.status === "SUCCESS") {
+                    allRoleJDs[activeJDRole] = data.data;
+                    toast("JD Saved!", `Updated Job Description & ATS keywords for ${activeJDRole}.`);
+                    if (alertBox) {
+                        alertBox.style.display = "block";
+                        alertBox.style.background = "#f0fdf4";
+                        alertBox.style.color = "#15803d";
+                        alertBox.style.border = "1px solid #86efac";
+                        alertBox.textContent = `✅ Successfully saved Job Description and ATS keywords for ${title || activeJDRole}!`;
+                    }
+                } else {
+                    toast("Save Failed", data.detail || "Error", true);
+                }
+            } catch (err) {
+                toast("Error", err.message, true);
+            } finally {
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerHTML = `💾 Save Job Description &amp; ATS Rules`;
+                }
+            }
+        }
+
+        document.addEventListener("keydown", e => { 
+            if (e.key === "Escape") {
+                closeDrawer();
+                closeFinalizeModal();
+                closeFeedbackModal();
+                closeLogsModal();
+                closeJDModal();
+            } 
+        });
+    </script>
+
+</body>
+
+</html>

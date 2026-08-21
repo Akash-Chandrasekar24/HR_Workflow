@@ -1,0 +1,385 @@
+{
+  "AI_ENGINEER": {
+    "title": "AI / ML Engineer",
+    "job_description": "We are seeking a high-caliber AI / ML Engineer to design, train, fine-tune, and deploy cutting-edge Machine Learning, Deep Learning, and Generative AI solutions. In this role, you will architect retrieval-augmented generation (RAG) pipelines, build multi-agent LLM workflows, optimize neural network architectures, and deploy scalable ML services into production using modern cloud and containerization ecosystems.",
+    "core_responsibilities": [
+      "Develop and fine-tune large language models (LLMs) and foundation models using PyTorch, TensorFlow, and Hugging Face.",
+      "Architect and implement production-grade Retrieval-Augmented Generation (RAG) pipelines and vector database systems (Pinecone, ChromaDB, Weaviate, FAISS).",
+      "Build intelligent multi-agent orchestration systems using LangChain, LlamaIndex, LangGraph, and AutoGen.",
+      "Construct efficient data preprocessing, ETL pipelines, and feature stores using Pandas, NumPy, and SQL.",
+      "Containerize and deploy low-latency AI microservices using Docker, Kubernetes, FastAPI, and Cloud platforms (GCP, AWS, Azure)."
+    ],
+    "ats_keywords": {
+      "mandatory_keywords": [
+        "Python",
+        "PyTorch",
+        "TensorFlow",
+        "Machine Learning",
+        "Deep Learning"
+      ],
+      "preferred_keywords": [
+        "LLM",
+        "GenAI",
+        "Generative AI",
+        "RAG",
+        "LangChain",
+        "LlamaIndex",
+        "Hugging Face",
+        "Transformers",
+        "Vector Database",
+        "Fine-tuning",
+        "Scikit-Learn",
+        "FastAPI"
+      ],
+      "good_to_have_keywords": [
+        "Docker",
+        "Kubernetes",
+        "MLOps",
+        "GCP",
+        "AWS",
+        "SQL",
+        "Pandas",
+        "NumPy",
+        "OpenAI",
+        "Embedding",
+        "Prompt Engineering"
+      ]
+    },
+    "mandatory": [
+      {
+        "field": "skills",
+        "value": "Python",
+        "type": "skill_present",
+        "label": "Required Skill: Python"
+      },
+      {
+        "field": "total_years_experience",
+        "value": 0.0,
+        "type": "min_value",
+        "label": "Minimum Experience: 0.0 Years"
+      }
+    ],
+    "weighted": [
+      {
+        "category": "Core Machine Learning & Deep Learning (PyTorch/TensorFlow)",
+        "weight": 35,
+        "keywords": [
+          "Python",
+          "PyTorch",
+          "TensorFlow",
+          "Scikit-Learn",
+          "Deep Learning",
+          "Machine Learning",
+          "Neural Networks"
+        ]
+      },
+      {
+        "category": "Generative AI, LLM & RAG Systems (LangChain/LlamaIndex)",
+        "weight": 35,
+        "keywords": [
+          "LLM",
+          "GenAI",
+          "Generative AI",
+          "RAG",
+          "LangChain",
+          "LlamaIndex",
+          "Hugging Face",
+          "Transformers",
+          "Vector Database",
+          "Embeddings",
+          "Prompt Engineering"
+        ]
+      },
+      {
+        "category": "Data Pipelines & Feature Engineering (SQL/Pandas/NumPy)",
+        "weight": 15,
+        "keywords": [
+          "SQL",
+          "PostgreSQL",
+          "Pandas",
+          "NumPy",
+          "Data Engineering",
+          "ETL"
+        ]
+      },
+      {
+        "category": "MLOps, Microservices & Cloud Deployment (Docker/FastAPI/Cloud)",
+        "weight": 15,
+        "keywords": [
+          "Docker",
+          "Kubernetes",
+          "FastAPI",
+          "GCP",
+          "AWS",
+          "MLOps",
+          "API"
+        ]
+      }
+    ],
+    "thresholds": {
+      "shortlist": 80,
+      "review": 60
+    }
+  },
+  "FULLSTACK_DEV": {
+    "title": "Full Stack Developer",
+    "job_description": "We are looking for a versatile Full Stack Developer to build robust, secure, and scalable web applications. You will be responsible for developing high-performance frontend interfaces with React/Next.js/TypeScript, architecting high-throughput backend APIs with Node.js/FastAPI/Python, managing relational and NoSQL databases, and ensuring seamless deployment across cloud infrastructure.",
+    "core_responsibilities": [
+      "Design and implement responsive, accessible, and high-performance UI components using React, Next.js, TypeScript, Vue.js, HTML5, and CSS3.",
+      "Architect and maintain RESTful and GraphQL APIs using Node.js, Express, FastAPI, Django, or Python.",
+      "Design database schemas, optimize SQL queries, and manage transactional integrity across PostgreSQL, MySQL, MongoDB, and Redis.",
+      "Implement secure authentication and authorization flows (OAuth2, JWT, SSO) and adhere to web application security best practices.",
+      "Deploy containerized microservices and configure CI/CD deployment pipelines using Docker, AWS, GCP, and Git."
+    ],
+    "ats_keywords": {
+      "mandatory_keywords": [
+        "JavaScript",
+        "TypeScript",
+        "React",
+        "Node.js",
+        "Python",
+        "SQL"
+      ],
+      "preferred_keywords": [
+        "Next.js",
+        "FastAPI",
+        "Express",
+        "PostgreSQL",
+        "MongoDB",
+        "REST API",
+        "GraphQL",
+        "Redux",
+        "TailwindCSS",
+        "Django",
+        "Docker",
+        "Git"
+      ],
+      "good_to_have_keywords": [
+        "AWS",
+        "GCP",
+        "CI/CD",
+        "Redis",
+        "Microservices",
+        "Kubernetes",
+        "Unit Testing",
+        "Jest",
+        "Pytest"
+      ]
+    },
+    "mandatory": [
+      {
+        "field": "total_years_experience",
+        "value": 2.0,
+        "type": "min_value",
+        "label": "Minimum Experience: 2.0 Years"
+      }
+    ],
+    "weighted": [
+      {
+        "category": "Frontend Architecture (React/Next.js/TypeScript/Vue)",
+        "weight": 35,
+        "keywords": [
+          "React",
+          "Next.js",
+          "TypeScript",
+          "JavaScript",
+          "Vue",
+          "HTML",
+          "CSS",
+          "Redux",
+          "TailwindCSS"
+        ]
+      },
+      {
+        "category": "Backend Engineering & APIs (FastAPI/Node.js/Django/Python)",
+        "weight": 35,
+        "keywords": [
+          "Node.js",
+          "Python",
+          "FastAPI",
+          "Express",
+          "Django",
+          "REST",
+          "GraphQL",
+          "API"
+        ]
+      },
+      {
+        "category": "Database Design & Performance (SQL/PostgreSQL/MongoDB)",
+        "weight": 15,
+        "keywords": [
+          "SQL",
+          "PostgreSQL",
+          "MongoDB",
+          "MySQL",
+          "Redis",
+          "Database"
+        ]
+      },
+      {
+        "category": "Cloud, Containers & CI/CD (Docker/AWS/GCP/Git)",
+        "weight": 15,
+        "keywords": [
+          "Docker",
+          "AWS",
+          "GCP",
+          "Git",
+          "CI/CD",
+          "Microservices",
+          "Kubernetes"
+        ]
+      }
+    ],
+    "thresholds": {
+      "shortlist": 80,
+      "review": 60
+    }
+  },
+  "DATA_ANALYST": {
+    "title": "Senior Data Analyst",
+    "job_description": "Updated Job Description for Data Analyst role.",
+    "core_responsibilities": [
+      "Build PowerBI and Tableau dashboards",
+      "Execute complex SQL queries"
+    ],
+    "ats_keywords": {
+      "mandatory_keywords": [
+        "SQL",
+        "Tableau",
+        "Power BI"
+      ],
+      "preferred_keywords": [
+        "Python",
+        "Pandas",
+        "Looker"
+      ],
+      "good_to_have_keywords": [
+        "Snowflake",
+        "ETL"
+      ]
+    },
+    "mandatory": [
+      {
+        "field": "skills",
+        "value": "SQL",
+        "type": "skill_present",
+        "label": "Required Skill: SQL"
+      }
+    ],
+    "weighted": [
+      {
+        "category": "Advanced SQL & Database Analytics",
+        "weight": 35,
+        "keywords": [
+          "SQL",
+          "PostgreSQL",
+          "Queries",
+          "Database",
+          "BigQuery",
+          "Snowflake",
+          "Aggregation"
+        ]
+      },
+      {
+        "category": "Business Intelligence & Visualization (Tableau/Power BI/Looker)",
+        "weight": 35,
+        "keywords": [
+          "Tableau",
+          "Power BI",
+          "PowerBI",
+          "Looker",
+          "Dashboard",
+          "Data Visualization",
+          "Reports",
+          "Excel"
+        ]
+      },
+      {
+        "category": "Statistical Analysis & Scripting (Python/Pandas/NumPy/R)",
+        "weight": 20,
+        "keywords": [
+          "Python",
+          "Pandas",
+          "NumPy",
+          "R",
+          "Statistics",
+          "EDA",
+          "Data Science",
+          "Data Cleaning"
+        ]
+      },
+      {
+        "category": "Business KPIs, Metrics & Stakeholder Communication",
+        "weight": 10,
+        "keywords": [
+          "KPI",
+          "Metrics",
+          "Business Intelligence",
+          "Analytics",
+          "Insights",
+          "Stakeholder"
+        ]
+      }
+    ],
+    "thresholds": {
+      "shortlist": 75,
+      "review": 55
+    }
+  },
+  "PYTHON_DEV": {
+    "title": "Python Developer",
+    "job_description": "Python Developer responsible for backend services, APIs, and data utilities.",
+    "core_responsibilities": [
+      "Develop and maintain Python backend services using FastAPI or Django",
+      "Write SQL queries and manage databases"
+    ],
+    "ats_keywords": {
+      "mandatory_keywords": [
+        "Python"
+      ],
+      "preferred_keywords": [
+        "FastAPI",
+        "Django",
+        "SQL",
+        "PostgreSQL"
+      ],
+      "good_to_have_keywords": [
+        "Docker",
+        "Git"
+      ]
+    },
+    "mandatory": [
+      {
+        "field": "skills",
+        "value": "Python",
+        "type": "skill_present",
+        "label": "Required Skill: Python"
+      }
+    ],
+    "weighted": [
+      {
+        "category": "Core Python & API Development",
+        "weight": 50,
+        "keywords": [
+          "Python",
+          "FastAPI",
+          "Django"
+        ]
+      },
+      {
+        "category": "Databases & Tools",
+        "weight": 50,
+        "keywords": [
+          "SQL",
+          "PostgreSQL",
+          "Docker",
+          "Git"
+        ]
+      }
+    ],
+    "thresholds": {
+      "shortlist": 75,
+      "review": 55
+    }
+  }
+}

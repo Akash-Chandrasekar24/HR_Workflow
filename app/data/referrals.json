@@ -1,0 +1,42 @@
+[
+  {
+    "candidate_email": "karthik.sundaram@gmail.com",
+    "candidate_name": "Karthik Sundaram",
+    "candidate_phone": "+91 98401 45210",
+    "referred_by_name": "Alex Johnson",
+    "referred_by_id": "EMP-101",
+    "referred_by_email": "akashchandrasekar24@gmail.com",
+    "department": "AI Engineer",
+    "notes": "Strong background in LLMs and AI system engineering."
+  },
+  {
+    "candidate_email": "sneha.venkat@gmail.com",
+    "candidate_name": "Sneha Venkataraman",
+    "candidate_phone": "+91 97908 12345",
+    "referred_by_name": "Priya Sharma",
+    "referred_by_id": "EMP-102",
+    "referred_by_email": "akashchandrasekar24@gmail.com",
+    "department": "Full Stack Developer",
+    "notes": "Experienced in FastAPI backend and React frontend."
+  },
+  {
+    "candidate_email": "pranav.murugan@gmail.com",
+    "candidate_name": "Pranav Murugan",
+    "candidate_phone": "+91 94440 67890",
+    "referred_by_name": "Rahul Verma",
+    "referred_by_id": "EMP-103",
+    "referred_by_email": "akashchandrasekar24@gmail.com",
+    "department": "Data Analyst",
+    "notes": "Skilled in SQL, Snowflake, and data warehouse modeling."
+  },
+  {
+    "candidate_email": "divya.nambiar@gmail.com",
+    "candidate_name": "Divya Nambiar",
+    "candidate_phone": "+91 98840 98765",
+    "referred_by_name": "Dr. Vikram Seth",
+    "referred_by_id": "EMP-105",
+    "referred_by_email": "akashchandrasekar24@gmail.com",
+    "department": "AI Engineer",
+    "notes": "Deep expertise in PyTorch and transformer models."
+  }
+]
